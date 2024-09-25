@@ -73,7 +73,7 @@ class __TwigTemplate_43952500cf54dc3dd5561afb81ff189d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Hello SongController!";
+        yield "Tracks";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -103,15 +103,77 @@ class __TwigTemplate_43952500cf54dc3dd5561afb81ff189d extends Template
 </style>
 
 <div class=\"example-wrapper\">
-    <h1>Hello ! ✅</h1>
+    <h1>Tracks and Artists</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code>/home/iutbgdin/Bureau/my_project/src/Controller/SongController.php</code></li>
-        <li>Your template at <code>/home/iutbgdin/Bureau/my_project/templates/song/index.html.twig</code></li>
-    </ul>
+        ";
+        // line 15
+        $context['_parent'] = $context;
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["tracks"]) || array_key_exists("tracks", $context) ? $context["tracks"] : (function () { throw new RuntimeError('Variable "tracks" does not exist.', 15, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["track"]) {
+            // line 16
+            yield "            <li>
+                <strong>Track Name:</strong> ";
+            // line 17
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "name", [], "any", false, false, false, 17), "html", null, true);
+            yield " <br>
+                <strong>Artists:</strong>
+                <ul>
+                    ";
+            // line 20
+            $context['_parent'] = $context;
+            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "artists", [], "any", false, false, false, 20));
+            foreach ($context['_seq'] as $context["_key"] => $context["artist"]) {
+                // line 21
+                yield "                        <li>";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["artist"], "name", [], "any", false, false, false, 21), "html", null, true);
+                yield "</li>
+                    ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_key'], $context['artist'], $context['_parent']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 23
+            yield "                </ul>
+            </li>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_key'], $context['track'], $context['_parent']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 26
+        yield "    </ul>
 </div>
 
+<div class=\"example-wrapper\">
+    <form id=\"searchForm\">
+        <div>
+            <label for=\"query\">Rechercher</label>
+            <input type=\"text\" id=\"query\" name=\"query\" placeholder=\"Entrez un nom\">
+        </div>
+        <button type=\"submit\">Rechercher</button>
+    </form>
+
+    <div id=\"results\"></div>
+</div>
+
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const query = document.getElementById('query').value;
+
+        fetch(`";
+        // line 48
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_track_index");
+        yield "?query=\${encodeURIComponent(query)}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('results').innerHTML = html;
+            });
+    });
+</script>
 
 ";
         
@@ -144,14 +206,14 @@ class __TwigTemplate_43952500cf54dc3dd5561afb81ff189d extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  169 => 48,  145 => 26,  137 => 23,  128 => 21,  124 => 20,  118 => 17,  115 => 16,  111 => 15,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Hello SongController!{% endblock %}
+{% block title %}Tracks{% endblock %}
 
 {% block body %}
 <style>
@@ -160,17 +222,51 @@ class __TwigTemplate_43952500cf54dc3dd5561afb81ff189d extends Template
 </style>
 
 <div class=\"example-wrapper\">
-    <h1>Hello ! ✅</h1>
+    <h1>Tracks and Artists</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code>/home/iutbgdin/Bureau/my_project/src/Controller/SongController.php</code></li>
-        <li>Your template at <code>/home/iutbgdin/Bureau/my_project/templates/song/index.html.twig</code></li>
+        {% for track in tracks %}
+            <li>
+                <strong>Track Name:</strong> {{ track.name }} <br>
+                <strong>Artists:</strong>
+                <ul>
+                    {% for artist in track.artists %}
+                        <li>{{ artist.name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
     </ul>
 </div>
 
+<div class=\"example-wrapper\">
+    <form id=\"searchForm\">
+        <div>
+            <label for=\"query\">Rechercher</label>
+            <input type=\"text\" id=\"query\" name=\"query\" placeholder=\"Entrez un nom\">
+        </div>
+        <button type=\"submit\">Rechercher</button>
+    </form>
+
+    <div id=\"results\"></div>
+</div>
+
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const query = document.getElementById('query').value;
+
+        fetch(`{{ path('app_track_index') }}?query=\${encodeURIComponent(query)}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('results').innerHTML = html;
+            });
+    });
+</script>
 
 {% endblock %}
-", "track/index.html.twig", "/home/iutbgdin/Bureau/Spotify-Symfony/templates/track/index.html.twig");
+", "track/index.html.twig", "/home/iutbgdin/Bureau/symfony/templates/track/index.html.twig");
     }
 }

@@ -471,6 +471,6 @@ class __TwigTemplate_20bdec7227895ef682b28959393e0195 extends Template
         </div>
     {% endfor %}
 {% endblock %}
-", "@Debug/Profiler/dump.html.twig", "/home/iutbgdin/Bureau/Spotify-Symfony/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
+", "@Debug/Profiler/dump.html.twig", "/home/iutbgdin/Bureau/symfony/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
     }
 }

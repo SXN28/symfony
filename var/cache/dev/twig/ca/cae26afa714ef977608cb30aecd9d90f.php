@@ -179,6 +179,6 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
     <body>
         {% block body %}{% endblock %}
     </body>
-</html>", "base.html.twig", "/home/iutbgdin/Bureau/Spotify-Symfony/templates/base.html.twig");
+</html>", "base.html.twig", "/home/iutbgdin/Bureau/symfony/templates/base.html.twig");
     }
 }

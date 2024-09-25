@@ -676,6 +676,6 @@ class __TwigTemplate_3596cbfd102d69ef16b921bf9532646a extends Template
         </div>
     {% endfor %}
 {% endblock %}
-", "@WebProfiler/Collector/notifier.html.twig", "/home/iutbgdin/Bureau/Spotify-Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Collector/notifier.html.twig");
+", "@WebProfiler/Collector/notifier.html.twig", "/home/iutbgdin/Bureau/symfony/vendor/symfony/web-profiler-bundle/Resources/views/Collector/notifier.html.twig");
     }
 }

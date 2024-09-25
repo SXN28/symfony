@@ -339,6 +339,6 @@ class __TwigTemplate_319e032eef256c1c61b9cadc15ecc7d3 extends Template
         {% block body '' %}
     </body>
 </html>
-", "@WebProfiler/Profiler/base.html.twig", "/home/iutbgdin/Bureau/Spotify-Symfony/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/base.html.twig");
+", "@WebProfiler/Profiler/base.html.twig", "/home/iutbgdin/Bureau/symfony/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/base.html.twig");
     }
 }

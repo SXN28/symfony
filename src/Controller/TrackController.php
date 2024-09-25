@@ -27,7 +27,7 @@ class TrackController extends AbstractController
     public function index(): Response
     {
         // Make the GET request to the Spotify API with kazzey as the query and the token as the Authorization header
-        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search?query=kazzey&type=track&locale=fr-FR', [
+        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search?query=juicewrld&type=track&locale=fr-FR', [
             'headers' => [
                 'Authorization' => 'Bearer ' . $this->token,
             ],

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SongController!{% endblock %}
+{% block title %}Tracks{% endblock %}
 
 {% block body %}
 <style>
@@ -9,14 +9,48 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello ! ✅</h1>
+    <h1>Tracks and Artists</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code>/home/iutbgdin/Bureau/my_project/src/Controller/SongController.php</code></li>
-        <li>Your template at <code>/home/iutbgdin/Bureau/my_project/templates/song/index.html.twig</code></li>
+        {% for track in tracks %}
+            <li>
+                <strong>Track Name:</strong> {{ track.name }} <br>
+                <strong>Artists:</strong>
+                <ul>
+                    {% for artist in track.artists %}
+                        <li>{{ artist.name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
     </ul>
 </div>
 
+<div class="example-wrapper">
+    <form id="searchForm">
+        <div>
+            <label for="query">Rechercher</label>
+            <input type="text" id="query" name="query" placeholder="Entrez un nom">
+        </div>
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const query = document.getElementById('query').value;
+
+        fetch(`{{ path('app_track_index') }}?query=${encodeURIComponent(query)}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('results').innerHTML = html;
+            });
+    });
+</script>
 
 {% endblock %}
