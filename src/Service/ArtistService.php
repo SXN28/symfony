@@ -17,7 +17,7 @@ class ArtistService
 
     public function getArtistDetails(string $id): array
     {
-        $token = $this->authSpotifyService->auth(); // Authentification et récupération du token
+        $token = $this->authSpotifyService->auth();
     
         $response = $this->httpClient->request('GET', "https://api.spotify.com/v1/artists/{$id}", [
             'headers' => [
@@ -25,7 +25,7 @@ class ArtistService
             ],
         ]);
     
-        return $response->toArray(); // Vérifiez ici si le format de réponse est correct
+        return $response->toArray();
     }
     
 }

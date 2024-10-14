@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche de Tracks{% endblock %}
-
 {% block body %}
 
 <style>
@@ -42,9 +40,9 @@
         padding: 0 20px;
     }
 
-    .form-group{
-        margin-right : 10px;
-    } 
+    .form-group {
+        margin-right: 10px;
+    }
 
     .card {
         background-color: #333;
@@ -63,32 +61,49 @@
     .text-center {
         color: white;
     }
-</style>
 
+    /* Style pour les boutons rouges */
+    .btn-red {
+        background-color: #cc0000; /* Rouge pour les boutons */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-red:hover {
+        background-color: #ff1a1a; /* Rouge plus clair au survol */
+    }
+
+    .btn-red:focus {
+        outline: none;
+    }
+
+</style>
 
 <div class="container my-4">
     <h1 class="my-4 text-center">Recherche de Musique et Artiste</h1>
 
     <div class="form-container">
-        <!-- Formulaire de recherche de musique -->
         <div class="form-section">
             <form id="searchForm" class="form-inline justify-content-center mb-4">
                 <div class="form-group">
                     <label for="query" class="sr-only">Rechercher</label>
                     <input type="text" id="query" name="track_query" class="form-control" placeholder="Entrez une musique" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Rechercher</button>
+                <button type="submit" class="btn btn-red">Rechercher</button> <!-- Bouton rouge -->
             </form>
         </div>
 
-        <!-- Formulaire de recherche d'artiste -->
         <div class="form-section">
             <form id="searchForm2" class="form-inline justify-content-center mb-4">
                 <div class="form-group">
                     <label for="query2" class="sr-only">Rechercher</label>
                     <input type="text" id="query2" name="artist_query" class="form-control" placeholder="Entrez un artiste" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Rechercher</button>
+                <button type="submit" class="btn btn-red">Rechercher</button> <!-- Bouton rouge -->
             </form>
         </div>
     </div>
@@ -99,20 +114,17 @@
     </div>
 </div>
 
-
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        // Vider les anciens résultats d'artistes
         document.getElementById('results2').innerHTML = '';
 
         const query = document.getElementById('query').value;
         console.log('Recherche pour:', query);
 
-        // Indicateur de chargement
         document.getElementById('results').innerHTML = '<p>Chargement des résultats...</p>';
 
         fetch(`{{ path('app_track_index') }}?query=${encodeURIComponent(query)}`, {
@@ -129,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(html => {
             document.getElementById('results').innerHTML = html;
-            // Réinitialiser le champ de recherche
             document.getElementById('query').value = '';
         })
         .catch(error => {
@@ -141,13 +152,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('searchForm2').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        // Vider les anciens résultats de pistes
         document.getElementById('results').innerHTML = '';
 
         const query2 = document.getElementById('query2').value;
         console.log('Recherche pour artiste:', query2);
 
-        // Indicateur de chargement
         document.getElementById('results2').innerHTML = '<p>Chargement des résultats...</p>';
 
         fetch(`{{ path('app_track_index') }}?artist_query=${encodeURIComponent(query2)}`, {
@@ -164,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(html => {
             document.getElementById('results2').innerHTML = html;
-            // Réinitialiser le champ de recherche
             document.getElementById('query2').value = '';
         })
         .catch(error => {
@@ -174,7 +182,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-    
 </script>
 {% endblock %}

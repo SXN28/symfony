@@ -1,8 +1,114 @@
-<h1>{{ artist.name }}</h1>
-{% if artist.images is not empty %}
-    <img src="{{ artist.images[0].url }}" alt="Artist image" class="img-fluid">
-{% endif %}
-<p><strong>Popularité:</strong> {{ artist.popularity }}</p>
-<p><strong>Genres:</strong> {{ artist.genres|join(', ') }}</p>
-<p><strong>Nombre de Suiveurs:</strong> {{ artist.followers.total }}</p>
-<!-- Ajoutez d'autres informations que vous souhaitez afficher -->
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        background-color: #121212; /* Couleur de fond sombre */
+        color: white; /* Couleur du texte */
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Typographie similaire à Spotify */
+    }
+
+    .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px; /* Ajout de padding pour un meilleur espacement */
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Titre plus grand */
+        margin-bottom: 20px; /* Espacement inférieur */
+    }
+
+    img {
+        border-radius: 10px; /* Coins arrondis pour les images */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Ombre pour un effet de profondeur */
+        max-width: 300px; /* Limite la largeur de l'image */
+        margin-bottom: 20px; /* Espacement inférieur pour l'image */
+    }
+
+    .info {
+        background-color: #1db954; /* Couleur d'accent pour les sections d'information */
+        padding: 15px; /* Espacement à l'intérieur des sections */
+        border-radius: 8px; /* Coins arrondis */
+        margin-bottom: 15px; /* Espacement entre les sections */
+        width: 100%;
+        max-width: 600px; /* Limite la largeur des sections d'information */
+        text-align: center; /* Centre le texte à l'intérieur des sections */
+    }
+
+    .genres {
+        font-style: italic; /* Style italique pour les genres */
+        color: #b3b3b3; /* Couleur grise pour un contraste subtil */
+    }
+
+    .albums, .top-tracks {
+        margin-top: 20px;
+        width: 100%;
+        max-width: 600px; /* Limite la largeur des listes */
+    }
+
+    .album, .track {
+        background-color: #333; /* Couleur de fond pour les albums et les morceaux */
+        padding: 10px; /* Espacement interne */
+        border-radius: 5px; /* Coins arrondis */
+        margin-bottom: 10px; /* Espacement entre les éléments */
+        color: white; /* Couleur du texte */
+    }
+
+    .track-title {
+        font-weight: bold; /* Met en gras les titres des morceaux */
+    }
+</style>
+
+
+
+<div class="container">
+    <h1>{{ artist.name }}</h1>
+    {% if artist.images is not empty %}
+        <img src="{{ artist.images[0].url }}" alt="Artist image" class="img-fluid">
+    {% endif %}
+    <div class="info">
+        <p><strong>Popularité:</strong> {{ artist.popularity }}</p>
+        <p><strong>Genres:</strong> <span class="genres">{{ artist.genres|join(', ') }}</span></p>
+        <p><strong>Nombre de Suiveurs:</strong> {{ artist.followers.total }}</p>
+    </div>
+
+    <!-- Albums -->
+    <div class="albums">
+        <h2>Tous les Albums</h2>
+        {% for album in albums %}
+            <div class="album">
+                <p><strong>{{ album.name }}</strong> ({{ album.release_date }})</p>
+                <p><strong>Nombre de Chansons:</strong> {{ album.total_tracks }}</p>
+                {% if album.images is not empty %}
+                    <img src="{{ album.images[0].url }}" alt="Album cover" class="img-fluid" style="max-width: 150px; border-radius: 8px;">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Top Tracks -->
+    <div class="top-tracks">
+        <h2>5 Chansons les Plus Écoutées</h2>
+        {% for track in top_tracks %}
+            <div class="track">
+                <p class="track-title">{{ track.name }}</p>
+                <p><strong>Popularité:</strong> {{ track.popularity }}</p> <!-- Utilisez la propriété 'popularity' -->
+                <p><strong>Durée:</strong> {{ (track.duration_ms / 60000)|number_format(2) }} min</p> <!-- Durée formatée -->
+                {% if track.album.images is not empty %}
+                    <img src="{{ track.album.images[0].url }}" alt="Album cover" class="img-fluid" style="max-width: 100px; border-radius: 8px;">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+{% endblock %}

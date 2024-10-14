@@ -28,7 +28,6 @@ class TrackController extends AbstractController
         $tracks = [];
         $artists = [];
 
-        // Recherche de pistes
         if ($trackQuery) {
             $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search', [
                 'headers' => [
@@ -44,7 +43,6 @@ class TrackController extends AbstractController
             $tracks = $this->trackFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
         }
 
-        // Recherche d'artistes
         if ($artistQuery) {
             $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search', [
                 'headers' => [
