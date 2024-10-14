@@ -1,0 +1,8 @@
+<h1>{{ artist.name }}</h1>
+{% if artist.images is not empty %}
+    <img src="{{ artist.images[0].url }}" alt="Artist image" class="img-fluid">
+{% endif %}
+<p><strong>Popularité:</strong> {{ artist.popularity }}</p>
+<p><strong>Genres:</strong> {{ artist.genres|join(', ') }}</p>
+<p><strong>Nombre de Suiveurs:</strong> {{ artist.followers.total }}</p>
+<!-- Ajoutez d'autres informations que vous souhaitez afficher -->

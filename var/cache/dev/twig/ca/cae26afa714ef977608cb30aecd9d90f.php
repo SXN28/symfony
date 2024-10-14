@@ -52,17 +52,18 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
 <html>
     <head>
         <meta charset=\"UTF-8\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
         <title>";
-        // line 5
+        // line 6
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
         yield "</title>
-        <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
+        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">
         ";
-        // line 7
+        // line 8
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
         // line 9
-        yield "
-    </head>
+        yield "    </head>
+
     <body>
         ";
         // line 12
@@ -79,7 +80,7 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         yield from [];
     }
 
-    // line 5
+    // line 6
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -92,7 +93,7 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Welcome!";
+        yield "My Project";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -102,7 +103,7 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         yield from [];
     }
 
-    // line 7
+    // line 8
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -115,8 +116,6 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 8
-        yield "        ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -161,7 +160,7 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  130 => 12,  119 => 8,  106 => 7,  83 => 5,  71 => 13,  69 => 12,  64 => 9,  62 => 7,  57 => 5,  51 => 1,);
+        return array (  129 => 12,  107 => 8,  84 => 6,  72 => 13,  70 => 12,  65 => 9,  63 => 8,  58 => 6,  51 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -170,12 +169,12 @@ class __TwigTemplate_011f1ca914078b33f814bb4a8eec4b50 extends Template
 <html>
     <head>
         <meta charset=\"UTF-8\">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>\">
-        {% block stylesheets %}
-        {% endblock %}
-
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+        <title>{% block title %}My Project{% endblock %}</title>
+        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">
+        {% block stylesheets %}{% endblock %}
     </head>
+
     <body>
         {% block body %}{% endblock %}
     </body>

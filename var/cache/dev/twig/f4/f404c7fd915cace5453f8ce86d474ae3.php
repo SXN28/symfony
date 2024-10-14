@@ -73,7 +73,7 @@ class __TwigTemplate_43952500cf54dc3dd5561afb81ff189d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "Tracks";
+        yield "Recherche de Tracks";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -97,84 +97,186 @@ class __TwigTemplate_43952500cf54dc3dd5561afb81ff189d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        yield "
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+    }
+
+    .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-container {
+        display: flex; 
+        width: 100%;
+        max-width: 1200px;
+        justify-content: space-around;
+        padding-top: 20px;
+    }
+
+    .form-section {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .results-container {
+        width: 100%;
+        margin-top: 20px;
+        padding: 0 20px;
+    }
+
+    .form-group{
+        margin-right : 10px;
+    } 
+
+    .card {
+        background-color: #333;
+        color: white;
+    }
+
+    .card h5, .card p {
+        color: white;
+    }
+
+    .card-img-top {
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+    .text-center {
+        color: white;
+    }
 </style>
 
-<div class=\"example-wrapper\">
-    <h1>Tracks and Artists</h1>
 
-    <ul>
-        ";
-        // line 15
-        $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["tracks"]) || array_key_exists("tracks", $context) ? $context["tracks"] : (function () { throw new RuntimeError('Variable "tracks" does not exist.', 15, $this->source); })()));
-        foreach ($context['_seq'] as $context["_key"] => $context["track"]) {
-            // line 16
-            yield "            <li>
-                <strong>Track Name:</strong> ";
-            // line 17
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "name", [], "any", false, false, false, 17), "html", null, true);
-            yield " <br>
-                <strong>Artists:</strong>
-                <ul>
-                    ";
-            // line 20
-            $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "artists", [], "any", false, false, false, 20));
-            foreach ($context['_seq'] as $context["_key"] => $context["artist"]) {
-                // line 21
-                yield "                        <li>";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["artist"], "name", [], "any", false, false, false, 21), "html", null, true);
-                yield "</li>
-                    ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_key'], $context['artist'], $context['_parent']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 23
-            yield "                </ul>
-            </li>
-        ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_key'], $context['track'], $context['_parent']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 26
-        yield "    </ul>
-</div>
+<div class=\"container my-4\">
+    <h1 class=\"my-4 text-center\">Recherche de Musique et Artiste</h1>
 
-<div class=\"example-wrapper\">
-    <form id=\"searchForm\">
-        <div>
-            <label for=\"query\">Rechercher</label>
-            <input type=\"text\" id=\"query\" name=\"query\" placeholder=\"Entrez un nom\">
+    <div class=\"form-container\">
+        <!-- Formulaire de recherche de musique -->
+        <div class=\"form-section\">
+            <form id=\"searchForm\" class=\"form-inline justify-content-center mb-4\">
+                <div class=\"form-group\">
+                    <label for=\"query\" class=\"sr-only\">Rechercher</label>
+                    <input type=\"text\" id=\"query\" name=\"track_query\" class=\"form-control\" placeholder=\"Entrez une musique\" required>
+                </div>
+                <button type=\"submit\" class=\"btn btn-primary\">Rechercher</button>
+            </form>
         </div>
-        <button type=\"submit\">Rechercher</button>
-    </form>
 
-    <div id=\"results\"></div>
+        <!-- Formulaire de recherche d'artiste -->
+        <div class=\"form-section\">
+            <form id=\"searchForm2\" class=\"form-inline justify-content-center mb-4\">
+                <div class=\"form-group\">
+                    <label for=\"query2\" class=\"sr-only\">Rechercher</label>
+                    <input type=\"text\" id=\"query2\" name=\"artist_query\" class=\"form-control\" placeholder=\"Entrez un artiste\" required>
+                </div>
+                <button type=\"submit\" class=\"btn btn-primary\">Rechercher</button>
+            </form>
+        </div>
+    </div>
+
+    <div class=\"results-container\">
+        <div id=\"results\" class=\"row\"></div>
+        <div id=\"results2\" class=\"row\"></div>
+    </div>
 </div>
 
 
 <script>
+
+document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
+        // Vider les anciens résultats d'artistes
+        document.getElementById('results2').innerHTML = '';
+
         const query = document.getElementById('query').value;
+        console.log('Recherche pour:', query);
+
+        // Indicateur de chargement
+        document.getElementById('results').innerHTML = '<p>Chargement des résultats...</p>';
 
         fetch(`";
-        // line 48
+        // line 118
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_track_index");
-        yield "?query=\${encodeURIComponent(query)}`)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('results').innerHTML = html;
-            });
+        yield "?query=\${encodeURIComponent(query)}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur dans la réponse du serveur.');
+            }
+            return response.text();
+        })
+        .then(html => {
+            document.getElementById('results').innerHTML = html;
+            // Réinitialiser le champ de recherche
+            document.getElementById('query').value = '';
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            document.getElementById('results').innerHTML = '<p>Erreur lors de la récupération des résultats.</p>';
+        });
     });
-</script>
 
+    document.getElementById('searchForm2').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Vider les anciens résultats de pistes
+        document.getElementById('results').innerHTML = '';
+
+        const query2 = document.getElementById('query2').value;
+        console.log('Recherche pour artiste:', query2);
+
+        // Indicateur de chargement
+        document.getElementById('results2').innerHTML = '<p>Chargement des résultats...</p>';
+
+        fetch(`";
+        // line 153
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_track_index");
+        yield "?artist_query=\${encodeURIComponent(query2)}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur dans la réponse du serveur.');
+            }
+            return response.text();
+        })
+        .then(html => {
+            document.getElementById('results2').innerHTML = html;
+            // Réinitialiser le champ de recherche
+            document.getElementById('query2').value = '';
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            document.getElementById('results2').innerHTML = '<p>Erreur lors de la récupération des résultats.</p>';
+        });
+    });
+});
+
+
+    
+</script>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -206,66 +308,190 @@ class __TwigTemplate_43952500cf54dc3dd5561afb81ff189d extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  169 => 48,  145 => 26,  137 => 23,  128 => 21,  124 => 20,  118 => 17,  115 => 16,  111 => 15,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  252 => 153,  214 => 118,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Tracks{% endblock %}
+{% block title %}Recherche de Tracks{% endblock %}
 
 {% block body %}
+
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    body, html {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+    }
+
+    .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-container {
+        display: flex; 
+        width: 100%;
+        max-width: 1200px;
+        justify-content: space-around;
+        padding-top: 20px;
+    }
+
+    .form-section {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .results-container {
+        width: 100%;
+        margin-top: 20px;
+        padding: 0 20px;
+    }
+
+    .form-group{
+        margin-right : 10px;
+    } 
+
+    .card {
+        background-color: #333;
+        color: white;
+    }
+
+    .card h5, .card p {
+        color: white;
+    }
+
+    .card-img-top {
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+    .text-center {
+        color: white;
+    }
 </style>
 
-<div class=\"example-wrapper\">
-    <h1>Tracks and Artists</h1>
 
-    <ul>
-        {% for track in tracks %}
-            <li>
-                <strong>Track Name:</strong> {{ track.name }} <br>
-                <strong>Artists:</strong>
-                <ul>
-                    {% for artist in track.artists %}
-                        <li>{{ artist.name }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+<div class=\"container my-4\">
+    <h1 class=\"my-4 text-center\">Recherche de Musique et Artiste</h1>
 
-<div class=\"example-wrapper\">
-    <form id=\"searchForm\">
-        <div>
-            <label for=\"query\">Rechercher</label>
-            <input type=\"text\" id=\"query\" name=\"query\" placeholder=\"Entrez un nom\">
+    <div class=\"form-container\">
+        <!-- Formulaire de recherche de musique -->
+        <div class=\"form-section\">
+            <form id=\"searchForm\" class=\"form-inline justify-content-center mb-4\">
+                <div class=\"form-group\">
+                    <label for=\"query\" class=\"sr-only\">Rechercher</label>
+                    <input type=\"text\" id=\"query\" name=\"track_query\" class=\"form-control\" placeholder=\"Entrez une musique\" required>
+                </div>
+                <button type=\"submit\" class=\"btn btn-primary\">Rechercher</button>
+            </form>
         </div>
-        <button type=\"submit\">Rechercher</button>
-    </form>
 
-    <div id=\"results\"></div>
+        <!-- Formulaire de recherche d'artiste -->
+        <div class=\"form-section\">
+            <form id=\"searchForm2\" class=\"form-inline justify-content-center mb-4\">
+                <div class=\"form-group\">
+                    <label for=\"query2\" class=\"sr-only\">Rechercher</label>
+                    <input type=\"text\" id=\"query2\" name=\"artist_query\" class=\"form-control\" placeholder=\"Entrez un artiste\" required>
+                </div>
+                <button type=\"submit\" class=\"btn btn-primary\">Rechercher</button>
+            </form>
+        </div>
+    </div>
+
+    <div class=\"results-container\">
+        <div id=\"results\" class=\"row\"></div>
+        <div id=\"results2\" class=\"row\"></div>
+    </div>
 </div>
 
 
 <script>
+
+document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
+        // Vider les anciens résultats d'artistes
+        document.getElementById('results2').innerHTML = '';
+
         const query = document.getElementById('query').value;
+        console.log('Recherche pour:', query);
 
-        fetch(`{{ path('app_track_index') }}?query=\${encodeURIComponent(query)}`)
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('results').innerHTML = html;
-            });
+        // Indicateur de chargement
+        document.getElementById('results').innerHTML = '<p>Chargement des résultats...</p>';
+
+        fetch(`{{ path('app_track_index') }}?query=\${encodeURIComponent(query)}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur dans la réponse du serveur.');
+            }
+            return response.text();
+        })
+        .then(html => {
+            document.getElementById('results').innerHTML = html;
+            // Réinitialiser le champ de recherche
+            document.getElementById('query').value = '';
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            document.getElementById('results').innerHTML = '<p>Erreur lors de la récupération des résultats.</p>';
+        });
     });
-</script>
 
+    document.getElementById('searchForm2').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Vider les anciens résultats de pistes
+        document.getElementById('results').innerHTML = '';
+
+        const query2 = document.getElementById('query2').value;
+        console.log('Recherche pour artiste:', query2);
+
+        // Indicateur de chargement
+        document.getElementById('results2').innerHTML = '<p>Chargement des résultats...</p>';
+
+        fetch(`{{ path('app_track_index') }}?artist_query=\${encodeURIComponent(query2)}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur dans la réponse du serveur.');
+            }
+            return response.text();
+        })
+        .then(html => {
+            document.getElementById('results2').innerHTML = html;
+            // Réinitialiser le champ de recherche
+            document.getElementById('query2').value = '';
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            document.getElementById('results2').innerHTML = '<p>Erreur lors de la récupération des résultats.</p>';
+        });
+    });
+});
+
+
+    
+</script>
 {% endblock %}
 ", "track/index.html.twig", "/home/iutbgdin/Bureau/symfony/templates/track/index.html.twig");
     }
