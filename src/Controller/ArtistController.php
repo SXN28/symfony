@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\AuthSpotifyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -14,6 +15,42 @@ class ArtistController extends AbstractController
         private readonly AuthSpotifyService $authSpotifyService,
         private readonly HttpClientInterface $httpClient
     ) {}
+
+    #[Route('/artist', name: 'app_artist_index')]
+    public function index(Request $request): Response
+    {
+        $token = $this->authSpotifyService->auth();
+        $artistQuery = $request->query->get('artist_query', '');
+
+        $artists = [];
+
+        if ($artistQuery) {
+            $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+                'query' => [
+                    'q' => $artistQuery,
+                    'type' => 'artist',
+                    'limit' => 12,
+                ],
+            ]);
+
+            $artists = $response->toArray()['artists']['items'];
+        }
+
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('artist/results.html.twig', [
+                'artists' => $artists,
+                'artist_query' => $artistQuery,
+            ]);
+        }
+
+        return $this->render('artist/index.html.twig', [
+            'artists' => $artists,
+            'artist_query' => $artistQuery,
+        ]);
+    }
 
     #[Route('/artist/{id}', name: 'artist_details')]
     public function details(string $id): Response
@@ -34,8 +71,6 @@ class ArtistController extends AbstractController
             ],
             'query' => [
                 'include_groups' => 'album,single',
-                'market' => 'FR',
-                'limit' => 50 
             ]
         ]);
 

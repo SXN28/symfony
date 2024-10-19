@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-4 text-center">{{ track.name }}</h1>
+
+    <div class="track-info">
+        <h4>Artiste(s): 
+            {% for artist in track.artists %}
+                <a href="{{ artist.external_urls.spotify }}" target="_blank">{{ artist.name }}</a>{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </h4>
+        <p><strong>Album:</strong> <a href="{{ track.album.external_urls.spotify }}" target="_blank">{{ track.album.name }}</a></p>
+        <p><strong>Popularité:</strong> {{ track.popularity }}%</p>
+        <p><strong>Numéro de piste:</strong> {{ track.track_number }}</p>
+        <p><strong>Disc numéro:</strong> {{ track.disc_number }}</p>
+        <p><strong>Est explicite:</strong> {{ track.explicit ? 'Oui' : 'Non' }}</p>
+        <p><strong>ID de piste:</strong> {{ track.id }}</p>
+        <p><strong>URI:</strong> {{ track.uri }}</p>
+        <p><strong>URL externe:</strong> <a href="{{ track.external_urls.spotify }}" target="_blank">{{ track.external_urls.spotify }}</a></p>
+        <p><strong>Disponible sur les marchés:</strong> {{ track.available_markets | join(', ') }}</p>
+        <p><strong>Est local:</strong> {{ track.is_local ? 'Oui' : 'Non' }}</p>
+    </div>
+
+    <div class="album-info">
+        <h3>Informations sur l'album</h3>
+        <img src="{{ track.album.images[0].url }}" alt="{{ track.album.name }}" class="img-fluid" style="max-width: 300px;">
+        <p><strong>Date de sortie:</strong> {{ track.album.release_date }}</p>
+    </div>
+</div>
+{% endblock %}

@@ -371,6 +371,9 @@
       </call>
     </service>
     <service id="App\Factory\TrackFactory" class="App\Factory\TrackFactory" autowire="true" autoconfigure="true"/>
+    <service id="App\Form\LoginType" class="App\Form\LoginType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Service\ArtistService" class="App\Service\ArtistService" autowire="true" autoconfigure="true">
       <argument type="service" id=".debug.http_client"/>
       <argument type="service" id="App\Service\AuthSpotifyService"/>
@@ -1315,9 +1318,11 @@
       <argument type="service" id="form.registry"/>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type</argument>
+        <argument>App\Form</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\LoginType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FileType</argument>
@@ -3811,7 +3816,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.9QYCuGc"/>
+      <argument type="service" id=".service_locator.rJe4emK"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -7084,6 +7089,8 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\TrackController" class="App\Controller\TrackController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\TrackController" class="App\Controller\TrackController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\TrackController" class="App\Controller\TrackController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\LoginType" class="App\Form\LoginType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\LoginType" class="App\Form\LoginType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.pRu6x_4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7770,9 +7777,10 @@
       <argument type="service" id="argument_resolver.query_parameter_value_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.9QYCuGc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.rJe4emK" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\LoginType" type="service_closure" id="App\Form\LoginType"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="service_closure" id="form.type.form"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\FileType" type="service_closure" id="form.type.file"/>

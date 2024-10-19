@@ -1,0 +1,60 @@
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+    }
+
+    .container {
+        min-height: 100vh; /* Prend toute la hauteur de la fenêtre */
+        min-width: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centrer verticalement */
+    }
+
+    .card {
+        background-color: #333; /* Couleur de fond de la carte pour le contraste */
+        color: white; /* Couleur du texte */
+        height: 100%; /* Assure que la carte prend toute la hauteur disponible */
+    }
+
+    .card h5, .card p {
+        color: white;
+    }
+
+    .card-img-top {
+        width: 100%; /* Force la largeur à 100% */
+        height: auto; /* La hauteur s'ajuste automatiquement */
+        aspect-ratio: 1; /* Cela garantit un carré */
+        object-fit: cover; /* Assure que l'image garde un bon ratio */
+    }
+
+    .text-center {
+        color: white;
+    }
+</style>
+
+<div class="container">
+    {% if artists is not empty %}
+        <h2 class="my-4 text-center">Artistes trouvés pour "{{ artist_query }}"</h2>
+        <div class="row">
+            {% for artist in artists %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                <a href="{{ path('artist_details', { 'id': artist.id }) }}" class="text-white">{{ artist.name }}</a>
+                            </h5>
+                            {% if artist.images is not empty %}
+                                <img src="{{ artist.images[0].url }}" class="card-img-top" alt="Artist image">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

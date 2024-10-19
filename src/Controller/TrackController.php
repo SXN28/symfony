@@ -23,10 +23,8 @@ class TrackController extends AbstractController
     {
         $token = $this->authSpotifyService->auth();
         $trackQuery = $request->query->get('query', '');
-        $artistQuery = $request->query->get('artist_query', '');
 
         $tracks = [];
-        $artists = [];
 
         if ($trackQuery) {
             $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search', [
@@ -43,37 +41,42 @@ class TrackController extends AbstractController
             $tracks = $this->trackFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
         }
 
-        if ($artistQuery) {
-            $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $token,
-                ],
-                'query' => [
-                    'q' => $artistQuery,
-                    'type' => 'artist',
-                    'limit' => 12,
-                ],
-            ]);
-
-            $artists = $response->toArray()['artists']['items'];
-        }
 
         if ($request->isXmlHttpRequest()) {
             return $this->render('track/results.html.twig', [
                 'tracks' => $tracks,
-                'artists' => $artists,
                 'query' => $trackQuery,
-                'artist_query' => $artistQuery,
             ]);
         }
 
         return $this->render('track/index.html.twig', [
             'tracks' => $tracks,
-            'artists' => $artists,
             'query' => $trackQuery,
-            'artist_query' => $artistQuery,
         ]);
     }
+
+    #[Route('/track/{id}', name: 'track_details')]
+    public function details(string $id): Response
+    {
+        // Authenticate and obtain the Spotify token
+        $token = $this->authSpotifyService->auth();
+
+        // Fetch track details from Spotify API
+        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $id, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+        ]);
+        
+        // Convert the response to an associative array
+        $track = $response->toArray();
+
+        // Return the details to the view
+        return $this->render('track/details.html.twig', [
+            'track' => $track,
+        ]);
+    }
+
 
 
 }

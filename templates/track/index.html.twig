@@ -14,20 +14,21 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start; /* Aligne le contenu vers le haut */
         align-items: center;
+        padding: 20px; /* Ajout de padding pour espacer le contenu du bord */
     }
 
     .form-container {
         display: flex; 
         width: 100%;
         max-width: 1200px;
-        justify-content: space-around;
-        padding-top: 20px;
+        justify-content: center; /* Centre le formulaire */
+        margin-bottom: 20px; /* Espacement entre le formulaire et les résultats */
     }
 
     .form-section {
-        width: 50%;
+        width: 100%; /* Utiliser toute la largeur pour un seul formulaire */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -84,7 +85,7 @@
 </style>
 
 <div class="container my-4">
-    <h1 class="my-4 text-center">Recherche de Musique et Artiste</h1>
+    <h1 class="my-4 text-center">Recherche de Musique</h1>
 
     <div class="form-container">
         <div class="form-section">
@@ -96,34 +97,28 @@
                 <button type="submit" class="btn btn-red">Rechercher</button> <!-- Bouton rouge -->
             </form>
         </div>
-
-        <div class="form-section">
-            <form id="searchForm2" class="form-inline justify-content-center mb-4">
-                <div class="form-group">
-                    <label for="query2" class="sr-only">Rechercher</label>
-                    <input type="text" id="query2" name="artist_query" class="form-control" placeholder="Entrez un artiste" required>
-                </div>
-                <button type="submit" class="btn btn-red">Rechercher</button> <!-- Bouton rouge -->
-            </form>
-        </div>
     </div>
 
     <div class="results-container">
         <div id="results" class="row"></div>
-        <div id="results2" class="row"></div>
     </div>
 </div>
 
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Recherche de musique
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        document.getElementById('results2').innerHTML = '';
-
-        const query = document.getElementById('query').value;
+        document.getElementById('results').innerHTML = ''; // Effacer les résultats précédents
+        const query = document.getElementById('query').value.trim(); // Supprimer les espaces
         console.log('Recherche pour:', query);
+        
+        if (!query) {
+            document.getElementById('results').innerHTML = '<p>Veuillez entrer une musique.</p>';
+            return; // Ne pas envoyer une requête vide
+        }
 
         document.getElementById('results').innerHTML = '<p>Chargement des résultats...</p>';
 
@@ -141,43 +136,11 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(html => {
             document.getElementById('results').innerHTML = html;
-            document.getElementById('query').value = '';
+            document.getElementById('query').value = ''; // Réinitialiser le champ de recherche
         })
         .catch(error => {
             console.error('Erreur:', error);
             document.getElementById('results').innerHTML = '<p>Erreur lors de la récupération des résultats.</p>';
-        });
-    });
-
-    document.getElementById('searchForm2').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        document.getElementById('results').innerHTML = '';
-
-        const query2 = document.getElementById('query2').value;
-        console.log('Recherche pour artiste:', query2);
-
-        document.getElementById('results2').innerHTML = '<p>Chargement des résultats...</p>';
-
-        fetch(`{{ path('app_track_index') }}?artist_query=${encodeURIComponent(query2)}`, {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erreur dans la réponse du serveur.');
-            }
-            return response.text();
-        })
-        .then(html => {
-            document.getElementById('results2').innerHTML = html;
-            document.getElementById('query2').value = '';
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-            document.getElementById('results2').innerHTML = '<p>Erreur lors de la récupération des résultats.</p>';
         });
     });
 });

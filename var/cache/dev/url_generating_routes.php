@@ -17,8 +17,12 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
+    'app_artist_index' => [[], ['_controller' => 'App\\Controller\\ArtistController::index'], [], [['text', '/artist']], [], [], []],
     'artist_details' => [['id'], ['_controller' => 'App\\Controller\\ArtistController::details'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/artist']], [], [], []],
     'app_track_index' => [[], ['_controller' => 'App\\Controller\\TrackController::index'], [], [['text', '/track']], [], [], []],
+    'track_details' => [['id'], ['_controller' => 'App\\Controller\\TrackController::details'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/track']], [], [], []],
+    'App\Controller\ArtistController::index' => [[], ['_controller' => 'App\\Controller\\ArtistController::index'], [], [['text', '/artist']], [], [], []],
     'App\Controller\ArtistController::details' => [['id'], ['_controller' => 'App\\Controller\\ArtistController::details'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/artist']], [], [], []],
     'App\Controller\TrackController::index' => [[], ['_controller' => 'App\\Controller\\TrackController::index'], [], [['text', '/track']], [], [], []],
+    'App\Controller\TrackController::details' => [['id'], ['_controller' => 'App\\Controller\\TrackController::details'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/track']], [], [], []],
 ];
