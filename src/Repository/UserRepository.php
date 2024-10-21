@@ -58,5 +58,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     //        ;
     //    }
 
+
+    // Méthode pour récupérer les favoris d'un utilisateur
+    public function getFavoriteTracks(User $user)
+    {
+        return $user->getFavoriteTracks();
+    }
+
     
 }

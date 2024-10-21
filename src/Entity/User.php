@@ -36,7 +36,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\ManyToMany(targetEntity: Track::class, inversedBy: 'users')]
-    #[ORM\JoinTable(name: 'user_favorites')]
     private Collection $favoriteTracks;
 
     public function __construct()
@@ -131,6 +130,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->favoriteTracks->contains($track)) {
             $this->favoriteTracks->add($track);
+            $track->addUser($this); // Ajouter l'utilisateur à la collection de tracks
         }
 
         return $this;
@@ -138,8 +138,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeFavoriteTrack(Track $track): static
     {
-        $this->favoriteTracks->removeElement($track);
+        if ($this->favoriteTracks->removeElement($track)) {
+            $track->removeUser($this); // Retirer l'utilisateur de la collection de tracks
+        }
 
         return $this;
     }
+
+    public function hasTrack(string $trackId): bool
+{
+    foreach ($this->favoriteTracks as $track) {
+        if ($track->getId() === $trackId) {
+            return true; // La piste est déjà dans les favoris
+        }
+    }
+    return false; // La piste n'est pas dans les favoris
+}
 }

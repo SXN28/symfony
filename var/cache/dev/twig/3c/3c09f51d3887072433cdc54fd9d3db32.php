@@ -157,7 +157,32 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
                 // line 70
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 70), "html", null, true);
                 yield "\" width=\"100%\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>
-
+                            
+                            <div>
+                                <form action=\"";
+                // line 73
+                yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_add_favorites");
+                yield "\" method=\"post\">
+                                    <input type=\"hidden\" name=\"id\" value=\"";
+                // line 74
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 74), "html", null, true);
+                yield "\">
+                                    <button type=\"submit\">
+                                        ";
+                // line 76
+                if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 76, $this->source); })()), "user", [], "any", false, false, false, 76), "hasTrack", [CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 76)], "method", false, false, false, 76)) {
+                    // line 77
+                    yield "                                            <i class=\"fas fa-heart\" style=\"color: #ff69b4;\"></i>
+                                        ";
+                } else {
+                    // line 79
+                    yield "                                            <i class=\"far fa-heart\" style=\"color: black;\"></i>
+                                        ";
+                }
+                // line 81
+                yield "                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,17 +191,17 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['track'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 76
+            // line 88
             yield "        </div>
     ";
         } else {
-            // line 78
+            // line 90
             yield "        <h2 class=\"my-4 text-center\">Aucune piste trouvée pour \"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 78, $this->source); })()), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 90, $this->source); })()), "html", null, true);
             yield "\"</h2> <!-- Message if no tracks are found -->
     ";
         }
-        // line 80
+        // line 92
         yield "</div>
 ";
         
@@ -209,7 +234,7 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  180 => 80,  174 => 78,  170 => 76,  158 => 70,  153 => 67,  142 => 64,  139 => 63,  135 => 62,  125 => 57,  121 => 55,  117 => 53,  111 => 51,  109 => 50,  105 => 48,  101 => 47,  95 => 45,  93 => 44,  48 => 1,);
+        return array (  205 => 92,  199 => 90,  195 => 88,  183 => 81,  179 => 79,  175 => 77,  173 => 76,  168 => 74,  164 => 73,  158 => 70,  153 => 67,  142 => 64,  139 => 63,  135 => 62,  125 => 57,  121 => 55,  117 => 53,  111 => 51,  109 => 50,  105 => 48,  101 => 47,  95 => 45,  93 => 44,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -284,7 +309,19 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
                             </p>
                             <!-- Spotify Player -->
                             <iframe src=\"https://open.spotify.com/embed/track/{{ track.id }}\" width=\"100%\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>
-
+                            
+                            <div>
+                                <form action=\"{{ path('app_add_favorites') }}\" method=\"post\">
+                                    <input type=\"hidden\" name=\"id\" value=\"{{ track.id }}\">
+                                    <button type=\"submit\">
+                                        {% if app.user.hasTrack(track.id) %}
+                                            <i class=\"fas fa-heart\" style=\"color: #ff69b4;\"></i>
+                                        {% else %}
+                                            <i class=\"far fa-heart\" style=\"color: black;\"></i>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -68,7 +68,19 @@
                             </p>
                             <!-- Spotify Player -->
                             <iframe src="https://open.spotify.com/embed/track/{{ track.id }}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
+                            
+                            <div>
+                                <form action="{{ path('app_add_favorites') }}" method="post">
+                                    <input type="hidden" name="id" value="{{ track.id }}">
+                                    <button type="submit">
+                                        {% if app.user.hasTrack(track.id) %}
+                                            <i class="fas fa-heart" style="color: #ff69b4;"></i>
+                                        {% else %}
+                                            <i class="far fa-heart" style="color: black;"></i>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

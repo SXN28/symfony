@@ -24,6 +24,9 @@ return [
     'app_register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/register']], [], [], []],
     'app_track_index' => [[], ['_controller' => 'App\\Controller\\TrackController::index'], [], [['text', '/track']], [], [], []],
     'track_details' => [['id'], ['_controller' => 'App\\Controller\\TrackController::details'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/track']], [], [], []],
+    'app_add_favorites' => [[], ['_controller' => 'App\\Controller\\TrackController::addFavorite'], [], [['text', '/addfavorites']], [], [], []],
+    'app_favorites' => [[], ['_controller' => 'App\\Controller\\TrackController::showFavorites'], [], [['text', '/favorites']], [], [], []],
+    'app_remove_favorites' => [['trackId'], ['_controller' => 'App\\Controller\\TrackController::removeFavorite'], [], [['variable', '/', '[^/]++', 'trackId', true], ['text', '/removefavorites']], [], [], []],
     'App\Controller\ArtistController::index' => [[], ['_controller' => 'App\\Controller\\ArtistController::index'], [], [['text', '/artist']], [], [], []],
     'App\Controller\ArtistController::details' => [['id'], ['_controller' => 'App\\Controller\\ArtistController::details'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/artist']], [], [], []],
     'App\Controller\LoginController::login' => [[], ['_controller' => 'App\\Controller\\LoginController::login'], [], [['text', '/login']], [], [], []],
@@ -31,4 +34,7 @@ return [
     'App\Controller\RegistrationController::register' => [[], ['_controller' => 'App\\Controller\\RegistrationController::register'], [], [['text', '/register']], [], [], []],
     'App\Controller\TrackController::index' => [[], ['_controller' => 'App\\Controller\\TrackController::index'], [], [['text', '/track']], [], [], []],
     'App\Controller\TrackController::details' => [['id'], ['_controller' => 'App\\Controller\\TrackController::details'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/track']], [], [], []],
+    'App\Controller\TrackController::addFavorite' => [[], ['_controller' => 'App\\Controller\\TrackController::addFavorite'], [], [['text', '/addfavorites']], [], [], []],
+    'App\Controller\TrackController::showFavorites' => [[], ['_controller' => 'App\\Controller\\TrackController::showFavorites'], [], [['text', '/favorites']], [], [], []],
+    'App\Controller\TrackController::removeFavorite' => [['trackId'], ['_controller' => 'App\\Controller\\TrackController::removeFavorite'], [], [['variable', '/', '[^/]++', 'trackId', true], ['text', '/removefavorites']], [], [], []],
 ];

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Favoris{% endblock %}
+
+{% block body %}
+    <h1>Mes Favoris</h1>
+
+    {% for track in favoriteTracks %}
+        <div>
+            <h2>{{ track.name }}</h2>
+            <form action="{{ path('app_remove_favorites', {'trackId': track.id}) }}" method="post">
+                <button type="submit">Supprimer des favoris</button>
+            </form>
+        </div>
+    {% else %}
+        <p>Aucun morceau dans vos favoris.</p>
+    {% endfor %}
+{% endblock %}

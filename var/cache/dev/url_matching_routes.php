@@ -19,6 +19,8 @@ return [
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\LoginController::logout'], null, null, null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/track' => [[['_route' => 'app_track_index', '_controller' => 'App\\Controller\\TrackController::index'], null, null, null, false, false, null]],
+        '/addfavorites' => [[['_route' => 'app_add_favorites', '_controller' => 'App\\Controller\\TrackController::addFavorite'], null, ['POST' => 0], null, false, false, null]],
+        '/favorites' => [[['_route' => 'app_favorites', '_controller' => 'App\\Controller\\TrackController::showFavorites'], null, ['GET' => 0], null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -42,6 +44,7 @@ return [
                 .')'
                 .'|/artist/([^/]++)(*:218)'
                 .'|/track/([^/]++)(*:241)'
+                .'|/removefavorites/([^/]++)(*:274)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -54,8 +57,9 @@ return [
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         218 => [[['_route' => 'artist_details', '_controller' => 'App\\Controller\\ArtistController::details'], ['id'], null, null, false, true, null]],
-        241 => [
-            [['_route' => 'track_details', '_controller' => 'App\\Controller\\TrackController::details'], ['id'], null, null, false, true, null],
+        241 => [[['_route' => 'track_details', '_controller' => 'App\\Controller\\TrackController::details'], ['id'], null, null, false, true, null]],
+        274 => [
+            [['_route' => 'app_remove_favorites', '_controller' => 'App\\Controller\\TrackController::removeFavorite'], ['trackId'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

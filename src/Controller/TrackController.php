@@ -80,5 +80,84 @@ class TrackController extends AbstractController
         ]);
     }
 
+    public function getTrack(string $id): Track
+    {
+        $token = $this->authSpotifyService->auth();
+        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $id, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ]
+        ]);
 
+        $track = $this->trackFactory->createFromSpotifyData($response->toArray());
+        return $track;
+    }
+
+    #[Route('/addfavorites', name: 'app_add_favorites', methods: ['POST'])]
+    public function addFavorite(Request $request, TrackRepository $trackRepository, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            $this->addFlash('error', 'Vous devez être connecté pour ajouter des favoris.');
+            return $this->redirectToRoute('app_track_index');
+        }
+
+        $trackId = $request->request->get('id');
+        $track = $trackRepository->findOneBy(['id' => $trackId]);
+
+        if (!$track) {
+            $track = $this->getTrack($trackId); // Récupérer la piste depuis Spotify
+            $em->persist($track);
+            $em->flush();
+            $this->addFlash('success', 'Le morceau a été ajouté avec succès.');
+        } else {
+            $this->addFlash('warning', 'Le morceau existe déjà.');
+        }
+
+        $user->addTrack($track);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('app_favorites');
+    }
+
+    #[Route('/favorites', name: 'app_favorites', methods: ['GET'])]
+    public function showFavorites(): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            $this->addFlash('error', 'Vous devez être connecté pour voir vos favoris.');
+            return $this->redirectToRoute('app_track_index');
+        }
+
+        $favoriteTracks = $user->getFavoriteTracks();
+
+        return $this->render('track/favorites.html.twig', [
+            'favoriteTracks' => $favoriteTracks,
+        ]);
+    }
+
+    #[Route('/removefavorites/{trackId}', name: 'app_remove_favorites', methods: ['POST'])]
+    public function removeFavorite(string $trackId, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            $this->addFlash('error', 'Vous devez être connecté pour supprimer des favoris.');
+            return $this->redirectToRoute('app_track_index');
+        }
+
+        $track = $this->trackRepository->find($trackId);
+        if (!$track) {
+            $this->addFlash('error', 'Morceau introuvable.');
+            return $this->redirectToRoute('app_favorites');
+        }
+
+        $user->removeFavoriteTrack($track);
+        $em->persist($user);
+        $em->flush();
+
+        $this->addFlash('success', 'Le morceau a été supprimé de vos favoris.');
+        return $this->redirectToRoute('app_favorites');
+    }
 }
+

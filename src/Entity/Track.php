@@ -170,11 +170,32 @@ class Track
         return $this->pictureLink;
     }
 
-     /**
+    /**
      * @return Collection<int, User>
      */
     public function getUsers(): Collection
     {
         return $this->users;
+    }
+
+    // Ajouter un utilisateur à la collection de favoris
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addTrack($this); // Ajouter également le track à l'utilisateur
+        }
+
+        return $this;
+    }
+
+    // Retirer un utilisateur de la collection de favoris
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeFavoriteTrack($this); // Retirer également le track de l'utilisateur
+        }
+
+        return $this;
     }
 }
