@@ -135,7 +135,6 @@ class __TwigTemplate_80c7f24fed768276209e10e8ddba84bf extends Template
         color: white;
     }
 
-    /* Style pour les boutons rouges */
     .btn-red {
         background-color: #cc0000; /* Rouge pour les boutons */
         color: white;
@@ -147,7 +146,7 @@ class __TwigTemplate_80c7f24fed768276209e10e8ddba84bf extends Template
     }
 
     .btn-red:hover {
-        background-color: #ff1a1a; /* Rouge plus clair au survol */
+        background-color: #ff1a1a;
     }
 
     .btn-red:focus {
@@ -195,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results').innerHTML = '<p>Chargement des résultats...</p>';
 
         fetch(`";
-        // line 125
+        // line 124
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_track_index");
         yield "?query=\${encodeURIComponent(query)}`, {
             method: 'GET',
@@ -204,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .then(response => {
+            console.log('Response:', response);
             if (!response.ok) {
                 throw new Error('Erreur dans la réponse du serveur.');
             }
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     public function getDebugInfo(): array
     {
-        return array (  199 => 125,  76 => 4,  63 => 3,  40 => 1,);
+        return array (  198 => 124,  76 => 4,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -322,7 +322,6 @@ document.addEventListener('DOMContentLoaded', function() {
         color: white;
     }
 
-    /* Style pour les boutons rouges */
     .btn-red {
         background-color: #cc0000; /* Rouge pour les boutons */
         color: white;
@@ -334,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     .btn-red:hover {
-        background-color: #ff1a1a; /* Rouge plus clair au survol */
+        background-color: #ff1a1a;
     }
 
     .btn-red:focus {
@@ -388,6 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .then(response => {
+            console.log('Response:', response);
             if (!response.ok) {
                 throw new Error('Erreur dans la réponse du serveur.');
             }

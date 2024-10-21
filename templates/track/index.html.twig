@@ -63,7 +63,6 @@
         color: white;
     }
 
-    /* Style pour les boutons rouges */
     .btn-red {
         background-color: #cc0000; /* Rouge pour les boutons */
         color: white;
@@ -75,7 +74,7 @@
     }
 
     .btn-red:hover {
-        background-color: #ff1a1a; /* Rouge plus clair au survol */
+        background-color: #ff1a1a;
     }
 
     .btn-red:focus {
@@ -129,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .then(response => {
+            console.log('Response:', response);
             if (!response.ok) {
                 throw new Error('Erreur dans la réponse du serveur.');
             }

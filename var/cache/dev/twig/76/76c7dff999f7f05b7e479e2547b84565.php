@@ -103,6 +103,17 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 color: #ff1a1a;
             }
 
+            .user-email {
+                margin-top: 20px;
+                color: #111;
+                background-color: red;
+                padding: 5px;
+                margin-bottom: 20px;
+                text-align: center;
+                border-radius: 20px;
+                font-weight: 800;
+            }
+
             /* Navbar + main content wrapper */
             .main-wrapper {
                 margin-left: 250px;
@@ -120,7 +131,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                height: 60px;
+                height: 80px;
                 position: relative;
                 z-index: 998;
             }
@@ -134,14 +145,13 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 margin: 0;
             }
 
-            /* Connexion button */
             .navbar .right {
-                margin-left: auto; /* Ensure the button stays to the right */
+                margin-left: auto;
                 display: flex;
                 align-items: center;
             }
 
-            .btn-login {
+            .btn {
                 background-color: #cc0000;
                 color: white;
                 padding: 10px 20px;
@@ -150,14 +160,13 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 border-radius: 25px;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
-                margin-left: auto;
+                margin-left: 10px;
             }
 
-            .btn-login:hover {
+            .btn:hover {
                 background-color: #ff1a1a;
             }
 
-            /* Main content styling */
             .main-content {
                 flex: 1;
                 padding: 20px;
@@ -165,41 +174,90 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
             }
         </style>
         ";
-        // line 110
+        // line 119
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 111
+        // line 120
         yield "    </head>
 
     <body>
         <!-- Sidebar -->
         <div class=\"sidebar\">
             <img src=\"";
-        // line 116
+        // line 125
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/spotify-removebg-preview.png"), "html", null, true);
         yield "\" width=\"25%\">
-            <h3>Navigation</h3>
+            ";
+        // line 126
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 126, $this->source); })()), "user", [], "any", false, false, false, 126)) {
+            // line 127
+            yield "                <!-- Display logged-in user's email -->
+                <div class=\"user-email\">";
+            // line 128
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 128, $this->source); })()), "user", [], "any", false, false, false, 128), "email", [], "any", false, false, false, 128), "html", null, true);
+            yield "</div>
+            ";
+        }
+        // line 130
+        yield "            <h3>Navigation</h3>
             <a href=\"";
-        // line 118
+        // line 131
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_track_index");
         yield "\">Recherche de Musique</a>
             <a href=\"";
-        // line 119
+        // line 132
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_artist_index");
         yield "\">Recherche d'Artiste</a>
-        </div>
+            ";
+        // line 133
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 133, $this->source); })()), "user", [], "any", false, false, false, 133)) {
+            // line 134
+            yield "                <!-- Link to the Favorites page -->
+                <a href=\"#\">Favoris</a>
+            ";
+        }
+        // line 137
+        yield "        </div>
 
         <!-- Main wrapper (navbar + content) -->
         <div class=\"main-wrapper\">
             <!-- Navbar -->
             <div class=\"navbar\">
                 <h1>";
-        // line 126
+        // line 143
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
         yield "</h1>
-                <!-- Button login -->
+                <!-- Button login and registration -->
                 <div class=\"right\">
-                    <a href=\"#\">
-                        <button class=\"btn-login\">Connexion</button>
+                    ";
+        // line 146
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 146, $this->source); })()), "user", [], "any", false, false, false, 146)) {
+            // line 147
+            yield "                        <!-- Logout button if user is logged in -->
+                        <a href=\"";
+            // line 148
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+            yield "\">
+                            <button class=\"btn\">Déconnexion</button>
+                        </a>
+                    ";
+        } else {
+            // line 152
+            yield "                        <!-- Login button if user is not logged in -->
+                        <a href=\"";
+            // line 153
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+            yield "\">
+                            <button class=\"btn\">Connexion</button>
+                        </a>
+                    ";
+        }
+        // line 157
+        yield "                    <!-- Registration button -->
+                    <a href=\"";
+        // line 158
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
+        yield "\">
+                        <button class=\"btn\">Inscription</button>
                     </a>
                 </div>
             </div>
@@ -207,9 +265,9 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
             <!-- Main Content -->
             <div class=\"main-content\">
                 ";
-        // line 137
+        // line 166
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 138
+        // line 167
         yield "            </div>
         </div>
     </body>
@@ -247,7 +305,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         yield from [];
     }
 
-    // line 110
+    // line 119
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -269,7 +327,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         yield from [];
     }
 
-    // line 126
+    // line 143
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -292,7 +350,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         yield from [];
     }
 
-    // line 137
+    // line 166
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -335,7 +393,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  296 => 137,  273 => 126,  251 => 110,  228 => 6,  213 => 138,  211 => 137,  197 => 126,  187 => 119,  183 => 118,  178 => 116,  171 => 111,  169 => 110,  63 => 7,  59 => 6,  52 => 1,);
+        return array (  354 => 166,  331 => 143,  309 => 119,  286 => 6,  271 => 167,  269 => 166,  258 => 158,  255 => 157,  248 => 153,  245 => 152,  238 => 148,  235 => 147,  233 => 146,  227 => 143,  219 => 137,  214 => 134,  212 => 133,  208 => 132,  204 => 131,  201 => 130,  196 => 128,  193 => 127,  191 => 126,  187 => 125,  180 => 120,  178 => 119,  63 => 7,  59 => 6,  52 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -388,6 +446,17 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 color: #ff1a1a;
             }
 
+            .user-email {
+                margin-top: 20px;
+                color: #111;
+                background-color: red;
+                padding: 5px;
+                margin-bottom: 20px;
+                text-align: center;
+                border-radius: 20px;
+                font-weight: 800;
+            }
+
             /* Navbar + main content wrapper */
             .main-wrapper {
                 margin-left: 250px;
@@ -405,7 +474,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                height: 60px;
+                height: 80px;
                 position: relative;
                 z-index: 998;
             }
@@ -419,14 +488,13 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 margin: 0;
             }
 
-            /* Connexion button */
             .navbar .right {
-                margin-left: auto; /* Ensure the button stays to the right */
+                margin-left: auto;
                 display: flex;
                 align-items: center;
             }
 
-            .btn-login {
+            .btn {
                 background-color: #cc0000;
                 color: white;
                 padding: 10px 20px;
@@ -435,14 +503,13 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 border-radius: 25px;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
-                margin-left: auto;
+                margin-left: 10px;
             }
 
-            .btn-login:hover {
+            .btn:hover {
                 background-color: #ff1a1a;
             }
 
-            /* Main content styling */
             .main-content {
                 flex: 1;
                 padding: 20px;
@@ -456,9 +523,17 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         <!-- Sidebar -->
         <div class=\"sidebar\">
             <img src=\"{{ asset('media/spotify-removebg-preview.png') }}\" width=\"25%\">
+            {% if app.user %}
+                <!-- Display logged-in user's email -->
+                <div class=\"user-email\">{{ app.user.email }}</div>
+            {% endif %}
             <h3>Navigation</h3>
             <a href=\"{{ path('app_track_index') }}\">Recherche de Musique</a>
             <a href=\"{{ path('app_artist_index') }}\">Recherche d'Artiste</a>
+            {% if app.user %}
+                <!-- Link to the Favorites page -->
+                <a href=\"#\">Favoris</a>
+            {% endif %}
         </div>
 
         <!-- Main wrapper (navbar + content) -->
@@ -466,10 +541,22 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
             <!-- Navbar -->
             <div class=\"navbar\">
                 <h1>{% block title %}Spotify{% endblock %}</h1>
-                <!-- Button login -->
+                <!-- Button login and registration -->
                 <div class=\"right\">
-                    <a href=\"#\">
-                        <button class=\"btn-login\">Connexion</button>
+                    {% if app.user %}
+                        <!-- Logout button if user is logged in -->
+                        <a href=\"{{ path('app_logout') }}\">
+                            <button class=\"btn\">Déconnexion</button>
+                        </a>
+                    {% else %}
+                        <!-- Login button if user is not logged in -->
+                        <a href=\"{{ path('app_login') }}\">
+                            <button class=\"btn\">Connexion</button>
+                        </a>
+                    {% endif %}
+                    <!-- Registration button -->
+                    <a href=\"{{ path('app_register') }}\">
+                        <button class=\"btn\">Inscription</button>
                     </a>
                 </div>
             </div>

@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Track;
 use App\Factory\TrackFactory;
+use App\Repository\FavoriteRepository;
+use App\Repository\TrackRepository;
+use App\Repository\UserRepository;
 use App\Service\AuthSpotifyService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +20,10 @@ class TrackController extends AbstractController
     public function __construct(
         private readonly AuthSpotifyService $authSpotifyService,
         private readonly HttpClientInterface $httpClient,
-        private readonly TrackFactory $trackFactory
+        private readonly TrackFactory $trackFactory,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserRepository $userRepository,
+        private readonly TrackRepository $trackRepository
     ) {}
 
     #[Route('/track', name: 'app_track_index')]
@@ -41,7 +49,6 @@ class TrackController extends AbstractController
             $tracks = $this->trackFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
         }
 
-
         if ($request->isXmlHttpRequest()) {
             return $this->render('track/results.html.twig', [
                 'tracks' => $tracks,
@@ -58,25 +65,20 @@ class TrackController extends AbstractController
     #[Route('/track/{id}', name: 'track_details')]
     public function details(string $id): Response
     {
-        // Authenticate and obtain the Spotify token
         $token = $this->authSpotifyService->auth();
 
-        // Fetch track details from Spotify API
         $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $id, [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
             ],
         ]);
         
-        // Convert the response to an associative array
         $track = $response->toArray();
 
-        // Return the details to the view
         return $this->render('track/details.html.twig', [
             'track' => $track,
         ]);
     }
-
 
 
 }

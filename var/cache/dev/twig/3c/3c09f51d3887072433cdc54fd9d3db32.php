@@ -157,6 +157,7 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
                 // line 70
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 70), "html", null, true);
                 yield "\" width=\"100%\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>
+
                         </div>
                     </div>
                 </div>
@@ -165,17 +166,17 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['track'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 75
+            // line 76
             yield "        </div>
     ";
         } else {
-            // line 77
+            // line 78
             yield "        <h2 class=\"my-4 text-center\">Aucune piste trouvée pour \"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 77, $this->source); })()), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 78, $this->source); })()), "html", null, true);
             yield "\"</h2> <!-- Message if no tracks are found -->
     ";
         }
-        // line 79
+        // line 80
         yield "</div>
 ";
         
@@ -208,7 +209,7 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  179 => 79,  173 => 77,  169 => 75,  158 => 70,  153 => 67,  142 => 64,  139 => 63,  135 => 62,  125 => 57,  121 => 55,  117 => 53,  111 => 51,  109 => 50,  105 => 48,  101 => 47,  95 => 45,  93 => 44,  48 => 1,);
+        return array (  180 => 80,  174 => 78,  170 => 76,  158 => 70,  153 => 67,  142 => 64,  139 => 63,  135 => 62,  125 => 57,  121 => 55,  117 => 53,  111 => 51,  109 => 50,  105 => 48,  101 => 47,  95 => 45,  93 => 44,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -283,6 +284,7 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
                             </p>
                             <!-- Spotify Player -->
                             <iframe src=\"https://open.spotify.com/embed/track/{{ track.id }}\" width=\"100%\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>
+
                         </div>
                     </div>
                 </div>

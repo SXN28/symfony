@@ -46,6 +46,17 @@
                 color: #ff1a1a;
             }
 
+            .user-email {
+                margin-top: 20px;
+                color: #111;
+                background-color: red;
+                padding: 5px;
+                margin-bottom: 20px;
+                text-align: center;
+                border-radius: 20px;
+                font-weight: 800;
+            }
+
             /* Navbar + main content wrapper */
             .main-wrapper {
                 margin-left: 250px;
@@ -63,7 +74,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                height: 60px;
+                height: 80px;
                 position: relative;
                 z-index: 998;
             }
@@ -77,14 +88,13 @@
                 margin: 0;
             }
 
-            /* Connexion button */
             .navbar .right {
-                margin-left: auto; /* Ensure the button stays to the right */
+                margin-left: auto;
                 display: flex;
                 align-items: center;
             }
 
-            .btn-login {
+            .btn {
                 background-color: #cc0000;
                 color: white;
                 padding: 10px 20px;
@@ -93,14 +103,13 @@
                 border-radius: 25px;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
-                margin-left: auto;
+                margin-left: 10px;
             }
 
-            .btn-login:hover {
+            .btn:hover {
                 background-color: #ff1a1a;
             }
 
-            /* Main content styling */
             .main-content {
                 flex: 1;
                 padding: 20px;
@@ -114,9 +123,17 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <img src="{{ asset('media/spotify-removebg-preview.png') }}" width="25%">
+            {% if app.user %}
+                <!-- Display logged-in user's email -->
+                <div class="user-email">{{ app.user.email }}</div>
+            {% endif %}
             <h3>Navigation</h3>
             <a href="{{ path('app_track_index') }}">Recherche de Musique</a>
             <a href="{{ path('app_artist_index') }}">Recherche d'Artiste</a>
+            {% if app.user %}
+                <!-- Link to the Favorites page -->
+                <a href="#">Favoris</a>
+            {% endif %}
         </div>
 
         <!-- Main wrapper (navbar + content) -->
@@ -124,10 +141,22 @@
             <!-- Navbar -->
             <div class="navbar">
                 <h1>{% block title %}Spotify{% endblock %}</h1>
-                <!-- Button login -->
+                <!-- Button login and registration -->
                 <div class="right">
-                    <a href="#">
-                        <button class="btn-login">Connexion</button>
+                    {% if app.user %}
+                        <!-- Logout button if user is logged in -->
+                        <a href="{{ path('app_logout') }}">
+                            <button class="btn">Déconnexion</button>
+                        </a>
+                    {% else %}
+                        <!-- Login button if user is not logged in -->
+                        <a href="{{ path('app_login') }}">
+                            <button class="btn">Connexion</button>
+                        </a>
+                    {% endif %}
+                    <!-- Registration button -->
+                    <a href="{{ path('app_register') }}">
+                        <button class="btn">Inscription</button>
                     </a>
                 </div>
             </div>
