@@ -62,6 +62,34 @@ class TrackController extends AbstractController
         ]);
     }
 
+    public function getTrack(string $id): Response
+    {
+        $token = $this->authSpotifyService->auth();
+        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $id, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ]
+        ]);
+        $recommendationsResponse = $this->httpClient->request('GET', 'https://api.spotify.com/v1/recommendations', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+            ],
+            'query' => [
+                'seed_tracks' => $id,
+                'limit' => 12,
+            ],
+        ]);
+
+        $track = $this->trackFactory->createFromSpotifyData($response->toArray());
+
+        $recommendations = $recommendationsResponse->toArray()['tracks'];
+
+        return $this->render('track/details.html.twig', [
+            'track' => $track,
+            'recommendations' => $recommendations,
+        ]);
+    }
+
     #[Route('/track/{id}', name: 'track_details')]
     public function details(string $id): Response
     {
@@ -106,7 +134,16 @@ class TrackController extends AbstractController
         $track = $trackRepository->findOneBy(['id' => $trackId]);
 
         if (!$track) {
-            $track = $this->getTrack($trackId);
+            $token = $this->authSpotifyService->auth();
+            $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $trackId, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token,
+                ],
+            ]);
+
+            $trackData = $response->toArray();
+            $track = $this->trackFactory->createFromSpotifyData($trackData);
+            
             $em->persist($track);
             $em->flush();
             $this->addFlash('success', 'Le morceau a été ajouté avec succès.');

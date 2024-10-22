@@ -390,6 +390,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 {% endblock %}
-", "artist/index.html.twig", "C:\\Users\\Clément\\symfony\\templates\\artist\\index.html.twig");
+", "artist/index.html.twig", "C:\\Users\\Clément\\Desktop\\symfony\\templates\\artist\\index.html.twig");
     }
 }

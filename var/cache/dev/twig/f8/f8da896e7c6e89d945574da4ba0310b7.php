@@ -716,6 +716,6 @@ class __TwigTemplate_f6d19160212510da4917eaffc8f992a9 extends Template
 </div>
 
 {% endblock %}
-", "artist/details.html.twig", "C:\\Users\\Clément\\symfony\\templates\\artist\\details.html.twig");
+", "artist/details.html.twig", "C:\\Users\\Clément\\Desktop\\symfony\\templates\\artist\\details.html.twig");
     }
 }

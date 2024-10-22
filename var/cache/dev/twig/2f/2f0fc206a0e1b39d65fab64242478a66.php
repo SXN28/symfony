@@ -551,6 +551,6 @@ class __TwigTemplate_21e0c19e208fc57b3a6a75d523bd67ef extends Template
     </div>
 </div>
 {% endblock %}
-", "track/details.html.twig", "C:\\Users\\Clément\\symfony\\templates\\track\\details.html.twig");
+", "track/details.html.twig", "C:\\Users\\Clément\\Desktop\\symfony\\templates\\track\\details.html.twig");
     }
 }

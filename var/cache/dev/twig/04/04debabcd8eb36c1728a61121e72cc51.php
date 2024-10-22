@@ -347,6 +347,6 @@ class __TwigTemplate_d2b362a0720729afd0ca6fbf7da79b94 extends Template
 </div>
 
 {% endblock %}
-", "track/favorites.html.twig", "C:\\Users\\Clément\\symfony\\templates\\track\\favorites.html.twig");
+", "track/favorites.html.twig", "C:\\Users\\Clément\\Desktop\\symfony\\templates\\track\\favorites.html.twig");
     }
 }
