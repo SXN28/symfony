@@ -1,31 +1,176 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+    }
+
+    .container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 50px;
+    }
+
+    .track-title {
+        font-size: 2.5rem;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .album-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .album-info img {
+        max-width: 300px;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .track-info {
+        background-color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 800px;
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .track-info h4 {
+        margin-bottom: 10px;
+    }
+
+    .track-info a {
+        color: red;
+        text-decoration: none;
+    }
+
+    .track-info a:hover {
+        text-decoration: underline;
+    }
+
+    .track-details {
+        margin-bottom: 10px;
+    }
+
+    iframe {
+        width: 100%;
+    }
+
+    .recommendations-section {
+        margin-top: 40px;
+    }
+
+    .recommendations-section h2 {
+        margin-top: 50px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .recommendation-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .recommendation-card {
+        background-color: #222;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .recommendation-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .recommendation-card img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .recommendation-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .recommendation-card h5 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .recommendation-card .artist-name {
+        font-size: 0.9rem;
+        color: #ccc;
+        margin-bottom: 10px;
+    }
+
+    .recommendation-card p a {
+        color: red;
+    }
+
+    .recommendation-card h5 a {
+        color: white;
+    }
+
+</style>
+
 <div class="container">
-    <h1 class="my-4 text-center">{{ track.name }}</h1>
+    <div class="album-info">
+        <img src="{{ track.album.images[0].url }}" alt="{{ track.album.name }}" class="img-fluid">
+    </div>
+
+    <h1 class="track-title">{{ track.name }}</h1>
 
     <div class="track-info">
         <h4>Artiste(s): 
             {% for artist in track.artists %}
-                <a href="{{ artist.external_urls.spotify }}" target="_blank">{{ artist.name }}</a>{% if not loop.last %}, {% endif %}
+                <a href="{{ path('artist_details', {'id': artist.id}) }}" >{{ artist.name }}</a>{% if not loop.last %}, {% endif %}
             {% endfor %}
         </h4>
-        <p><strong>Album:</strong> <a href="{{ track.album.external_urls.spotify }}" target="_blank">{{ track.album.name }}</a></p>
-        <p><strong>Popularité:</strong> {{ track.popularity }}%</p>
-        <p><strong>Numéro de piste:</strong> {{ track.track_number }}</p>
-        <p><strong>Disc numéro:</strong> {{ track.disc_number }}</p>
-        <p><strong>Est explicite:</strong> {{ track.explicit ? 'Oui' : 'Non' }}</p>
-        <p><strong>ID de piste:</strong> {{ track.id }}</p>
-        <p><strong>URI:</strong> {{ track.uri }}</p>
-        <p><strong>URL externe:</strong> <a href="{{ track.external_urls.spotify }}" target="_blank">{{ track.external_urls.spotify }}</a></p>
-        <p><strong>Disponible sur les marchés:</strong> {{ track.available_markets | join(', ') }}</p>
-        <p><strong>Est local:</strong> {{ track.is_local ? 'Oui' : 'Non' }}</p>
+        <div class="track-details">
+            <p><strong>Album :</strong> <a href="{{ path('track_details', {'id': track.album.id}) }}" target="_blank">{{ track.album.name }}</a></p>
+            <p><strong>Date de sortie :</strong> {{ track.album.release_date }}</p>
+            <p><strong>Popularité :</strong> {{ track.popularity }}%</p>
+            <p><strong>URL :</strong> <a href="{{ track.external_urls.spotify }}" target="_blank">{{ track.external_urls.spotify }}</a></p>
+        </div>
+        
+        <iframe src="https://open.spotify.com/embed/track/{{ track.id }}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
 
-    <div class="album-info">
-        <h3>Informations sur l'album</h3>
-        <img src="{{ track.album.images[0].url }}" alt="{{ track.album.name }}" class="img-fluid" style="max-width: 300px;">
-        <p><strong>Date de sortie:</strong> {{ track.album.release_date }}</p>
+    <div class="recommendations-section">
+        <h2>Chansons recommandées</h2>
+        <div class="recommendation-row">
+            {% for recommendation in recommendations %}
+                <div class="recommendation-card">
+                    <img src="{{ recommendation.album.images[0].url }}" alt="{{ recommendation.name }}">
+                    <h5><a href="{{ path('track_details', {'id': recommendation.id}) }}">{{ recommendation.name }}</a></h5> <!-- Lien vers la chanson -->
+                    <p class="artist-name"><a href="{{ path('artist_details', {'id': recommendation.artists[0].id}) }}">{{ recommendation.artists[0].name }}</a></p> <!-- Lien vers l'artiste -->
+                    <iframe src="https://open.spotify.com/embed/track/{{ recommendation.id }}" width="90%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -86,17 +86,17 @@ class __TwigTemplate_e4d3b626f990887c9b034f133aef7bc9 extends Template
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* Aligne vers le haut */
+        justify-content: flex-start;
         align-items: center;
-        padding: 20px; /* Ajout de padding pour espacer le contenu du bord */
+        padding: 20px;
     }
 
     .form-container {
         display: flex; 
         width: 100%;
         max-width: 1200px;
-        justify-content: center; /* Centré horizontalement */
-        margin-bottom: 20px; /* Espacement entre le formulaire et les résultats */
+        justify-content: center;
+        margin-bottom: 20px;
     }
 
     .form-section {
@@ -135,9 +135,8 @@ class __TwigTemplate_e4d3b626f990887c9b034f133aef7bc9 extends Template
         color: white;
     }
 
-    /* Style pour les boutons rouges */
     .btn-red {
-        background-color: #cc0000; /* Rouge pour les boutons */
+        background-color: #cc0000;
         color: white;
         border: none;
         padding: 10px 20px;
@@ -147,7 +146,7 @@ class __TwigTemplate_e4d3b626f990887c9b034f133aef7bc9 extends Template
     }
 
     .btn-red:hover {
-        background-color: #ff1a1a; /* Rouge plus clair au survol */
+        background-color: #ff1a1a;
     }
 
     .btn-red:focus {
@@ -166,7 +165,7 @@ class __TwigTemplate_e4d3b626f990887c9b034f133aef7bc9 extends Template
                     <label for=\"query2\" class=\"sr-only\">Rechercher</label>
                     <input type=\"text\" id=\"query2\" name=\"artist_query\" class=\"form-control\" placeholder=\"Entrez un artiste\" required>
                 </div>
-                <button type=\"submit\" class=\"btn btn-red\">Rechercher</button> <!-- Bouton rouge -->
+                <button type=\"submit\" class=\"btn btn-red\">Rechercher</button>
             </form>
         </div>
     </div>
@@ -179,7 +178,6 @@ class __TwigTemplate_e4d3b626f990887c9b034f133aef7bc9 extends Template
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Recherche d'artiste
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -189,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results2').innerHTML = '<p>Chargement des résultats...</p>';
 
         fetch(`";
-        // line 119
+        // line 117
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_artist_index");
         yield "?artist_query=\${encodeURIComponent(query2)}`, {
             method: 'GET',
@@ -246,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     public function getDebugInfo(): array
     {
-        return array (  193 => 119,  76 => 4,  63 => 3,  40 => 1,);
+        return array (  191 => 117,  76 => 4,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -267,17 +265,17 @@ document.addEventListener('DOMContentLoaded', function() {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* Aligne vers le haut */
+        justify-content: flex-start;
         align-items: center;
-        padding: 20px; /* Ajout de padding pour espacer le contenu du bord */
+        padding: 20px;
     }
 
     .form-container {
         display: flex; 
         width: 100%;
         max-width: 1200px;
-        justify-content: center; /* Centré horizontalement */
-        margin-bottom: 20px; /* Espacement entre le formulaire et les résultats */
+        justify-content: center;
+        margin-bottom: 20px;
     }
 
     .form-section {
@@ -316,9 +314,8 @@ document.addEventListener('DOMContentLoaded', function() {
         color: white;
     }
 
-    /* Style pour les boutons rouges */
     .btn-red {
-        background-color: #cc0000; /* Rouge pour les boutons */
+        background-color: #cc0000;
         color: white;
         border: none;
         padding: 10px 20px;
@@ -328,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     .btn-red:hover {
-        background-color: #ff1a1a; /* Rouge plus clair au survol */
+        background-color: #ff1a1a;
     }
 
     .btn-red:focus {
@@ -347,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <label for=\"query2\" class=\"sr-only\">Rechercher</label>
                     <input type=\"text\" id=\"query2\" name=\"artist_query\" class=\"form-control\" placeholder=\"Entrez un artiste\" required>
                 </div>
-                <button type=\"submit\" class=\"btn btn-red\">Rechercher</button> <!-- Bouton rouge -->
+                <button type=\"submit\" class=\"btn btn-red\">Rechercher</button>
             </form>
         </div>
     </div>
@@ -360,7 +357,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Recherche d'artiste
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
 

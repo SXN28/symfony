@@ -58,8 +58,9 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         // line 6
         yield from $this->unwrap()->yieldBlock('title_page', $context, $blocks);
         yield "</title>
+        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css\">
         <link rel=\"icon\" href=\"";
-        // line 7
+        // line 8
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/spotify-removebg-preview.png"), "html", null, true);
         yield "\" type=\"image/x-icon\">
         <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">
@@ -72,7 +73,6 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 color: white;
             }
 
-            /* Sidebar styling */
             .sidebar {
                 width: 250px;
                 background-color: #111;
@@ -114,7 +114,6 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 font-weight: 800;
             }
 
-            /* Navbar + main content wrapper */
             .main-wrapper {
                 margin-left: 250px;
                 width: calc(100% - 250px);
@@ -123,7 +122,6 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 min-height: 100vh;
             }
 
-            /* Navbar styling */
             .navbar {
                 width: 100%;
                 background-color: #111;
@@ -174,87 +172,76 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
             }
         </style>
         ";
-        // line 119
+        // line 117
         yield from $this->unwrap()->yieldBlock('stylesheets', $context, $blocks);
-        // line 120
+        // line 118
         yield "    </head>
 
     <body>
-        <!-- Sidebar -->
         <div class=\"sidebar\">
             <img src=\"";
-        // line 125
+        // line 122
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/spotify-removebg-preview.png"), "html", null, true);
         yield "\" width=\"25%\">
             ";
-        // line 126
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 126, $this->source); })()), "user", [], "any", false, false, false, 126)) {
-            // line 127
-            yield "                <!-- Display logged-in user's email -->
-                <div class=\"user-email\">";
-            // line 128
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 128, $this->source); })()), "user", [], "any", false, false, false, 128), "email", [], "any", false, false, false, 128), "html", null, true);
+        // line 123
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 123, $this->source); })()), "user", [], "any", false, false, false, 123)) {
+            // line 124
+            yield "                <div class=\"user-email\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 124, $this->source); })()), "user", [], "any", false, false, false, 124), "email", [], "any", false, false, false, 124), "html", null, true);
             yield "</div>
             ";
         }
-        // line 130
+        // line 126
         yield "            <h3>Navigation</h3>
             <a href=\"";
-        // line 131
+        // line 127
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_track_index");
         yield "\">Recherche de Musique</a>
             <a href=\"";
-        // line 132
+        // line 128
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_artist_index");
         yield "\">Recherche d'Artiste</a>
             ";
-        // line 133
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 133, $this->source); })()), "user", [], "any", false, false, false, 133)) {
-            // line 134
-            yield "                <!-- Link to the Favorites page -->
-                <a href=\"#\">Favoris</a>
+        // line 129
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 129, $this->source); })()), "user", [], "any", false, false, false, 129)) {
+            // line 130
+            yield "                <a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_favorites");
+            yield "\">Favoris</a>
             ";
         }
-        // line 137
+        // line 132
         yield "        </div>
 
-        <!-- Main wrapper (navbar + content) -->
         <div class=\"main-wrapper\">
-            <!-- Navbar -->
             <div class=\"navbar\">
                 <h1>";
-        // line 143
+        // line 136
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
         yield "</h1>
-                <!-- Button login and registration -->
                 <div class=\"right\">
                     ";
-        // line 146
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 146, $this->source); })()), "user", [], "any", false, false, false, 146)) {
-            // line 147
-            yield "                        <!-- Logout button if user is logged in -->
-                        <a href=\"";
-            // line 148
+        // line 138
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 138, $this->source); })()), "user", [], "any", false, false, false, 138)) {
+            // line 139
+            yield "                        <a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
             yield "\">
                             <button class=\"btn\">Déconnexion</button>
                         </a>
                     ";
         } else {
-            // line 152
-            yield "                        <!-- Login button if user is not logged in -->
-                        <a href=\"";
-            // line 153
+            // line 143
+            yield "                        <a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
             yield "\">
                             <button class=\"btn\">Connexion</button>
                         </a>
                     ";
         }
-        // line 157
-        yield "                    <!-- Registration button -->
-                    <a href=\"";
-        // line 158
+        // line 147
+        yield "                    <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
         yield "\">
                         <button class=\"btn\">Inscription</button>
@@ -262,12 +249,11 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 </div>
             </div>
 
-            <!-- Main Content -->
             <div class=\"main-content\">
                 ";
-        // line 166
+        // line 154
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 167
+        // line 155
         yield "            </div>
         </div>
     </body>
@@ -305,7 +291,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         yield from [];
     }
 
-    // line 119
+    // line 117
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -327,7 +313,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         yield from [];
     }
 
-    // line 143
+    // line 136
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -350,7 +336,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         yield from [];
     }
 
-    // line 166
+    // line 154
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -393,7 +379,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  354 => 166,  331 => 143,  309 => 119,  286 => 6,  271 => 167,  269 => 166,  258 => 158,  255 => 157,  248 => 153,  245 => 152,  238 => 148,  235 => 147,  233 => 146,  227 => 143,  219 => 137,  214 => 134,  212 => 133,  208 => 132,  204 => 131,  201 => 130,  196 => 128,  193 => 127,  191 => 126,  187 => 125,  180 => 120,  178 => 119,  63 => 7,  59 => 6,  52 => 1,);
+        return array (  340 => 154,  317 => 136,  295 => 117,  272 => 6,  257 => 155,  255 => 154,  244 => 147,  236 => 143,  228 => 139,  226 => 138,  221 => 136,  215 => 132,  209 => 130,  207 => 129,  203 => 128,  199 => 127,  196 => 126,  190 => 124,  188 => 123,  184 => 122,  178 => 118,  176 => 117,  64 => 8,  59 => 6,  52 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -404,6 +390,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         <meta charset=\"UTF-8\">
         <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
         <title>{% block title_page %}Spotify{% endblock %}</title>
+        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css\">
         <link rel=\"icon\" href=\"{{ asset('media/spotify-removebg-preview.png') }}\" type=\"image/x-icon\">
         <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">
         <style>
@@ -415,7 +402,6 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 color: white;
             }
 
-            /* Sidebar styling */
             .sidebar {
                 width: 250px;
                 background-color: #111;
@@ -457,7 +443,6 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 font-weight: 800;
             }
 
-            /* Navbar + main content wrapper */
             .main-wrapper {
                 margin-left: 250px;
                 width: calc(100% - 250px);
@@ -466,7 +451,6 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                 min-height: 100vh;
             }
 
-            /* Navbar styling */
             .navbar {
                 width: 100%;
                 background-color: #111;
@@ -520,48 +504,38 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
     </head>
 
     <body>
-        <!-- Sidebar -->
         <div class=\"sidebar\">
             <img src=\"{{ asset('media/spotify-removebg-preview.png') }}\" width=\"25%\">
             {% if app.user %}
-                <!-- Display logged-in user's email -->
                 <div class=\"user-email\">{{ app.user.email }}</div>
             {% endif %}
             <h3>Navigation</h3>
             <a href=\"{{ path('app_track_index') }}\">Recherche de Musique</a>
             <a href=\"{{ path('app_artist_index') }}\">Recherche d'Artiste</a>
             {% if app.user %}
-                <!-- Link to the Favorites page -->
-                <a href=\"#\">Favoris</a>
+                <a href=\"{{path('app_favorites')}}\">Favoris</a>
             {% endif %}
         </div>
 
-        <!-- Main wrapper (navbar + content) -->
         <div class=\"main-wrapper\">
-            <!-- Navbar -->
             <div class=\"navbar\">
                 <h1>{% block title %}Spotify{% endblock %}</h1>
-                <!-- Button login and registration -->
                 <div class=\"right\">
                     {% if app.user %}
-                        <!-- Logout button if user is logged in -->
                         <a href=\"{{ path('app_logout') }}\">
                             <button class=\"btn\">Déconnexion</button>
                         </a>
                     {% else %}
-                        <!-- Login button if user is not logged in -->
                         <a href=\"{{ path('app_login') }}\">
                             <button class=\"btn\">Connexion</button>
                         </a>
                     {% endif %}
-                    <!-- Registration button -->
                     <a href=\"{{ path('app_register') }}\">
                         <button class=\"btn\">Inscription</button>
                     </a>
                 </div>
             </div>
 
-            <!-- Main Content -->
             <div class=\"main-content\">
                 {% block body %}{% endblock %}
             </div>

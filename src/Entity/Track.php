@@ -178,22 +178,20 @@ class Track
         return $this->users;
     }
 
-    // Ajouter un utilisateur à la collection de favoris
     public function addUser(User $user): static
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
-            $user->addTrack($this); // Ajouter également le track à l'utilisateur
+            $user->addTrack($this);
         }
 
         return $this;
     }
 
-    // Retirer un utilisateur de la collection de favoris
     public function removeUser(User $user): static
     {
         if ($this->users->removeElement($user)) {
-            $user->removeFavoriteTrack($this); // Retirer également le track de l'utilisateur
+            $user->removeFavoriteTrack($this);
         }
 
         return $this;

@@ -55,17 +55,17 @@ class __TwigTemplate_f43a69a4287733da8b4baea32b1f4288 extends Template
     }
 
     .container {
-        min-height: 100vh; /* Prend toute la hauteur de la fenêtre */
+        min-height: 100vh;
         min-width: 90vh;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Centrer verticalement */
+        justify-content: center;
     }
 
     .card {
-        background-color: #333; /* Couleur de fond de la carte pour le contraste */
-        color: white; /* Couleur du texte */
-        height: 100%; /* Assure que la carte prend toute la hauteur disponible */
+        background-color: #333;
+        color: white;
+        height: 100%;
     }
 
     .card h5, .card p {
@@ -73,10 +73,10 @@ class __TwigTemplate_f43a69a4287733da8b4baea32b1f4288 extends Template
     }
 
     .card-img-top {
-        width: 100%; /* Force la largeur à 100% */
-        height: auto; /* La hauteur s'ajuste automatiquement */
-        aspect-ratio: 1; /* Cela garantit un carré */
-        object-fit: cover; /* Assure que l'image garde un bon ratio */
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
     }
 
     .text-center {
@@ -180,17 +180,17 @@ class __TwigTemplate_f43a69a4287733da8b4baea32b1f4288 extends Template
     }
 
     .container {
-        min-height: 100vh; /* Prend toute la hauteur de la fenêtre */
+        min-height: 100vh;
         min-width: 90vh;
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Centrer verticalement */
+        justify-content: center;
     }
 
     .card {
-        background-color: #333; /* Couleur de fond de la carte pour le contraste */
-        color: white; /* Couleur du texte */
-        height: 100%; /* Assure que la carte prend toute la hauteur disponible */
+        background-color: #333;
+        color: white;
+        height: 100%;
     }
 
     .card h5, .card p {
@@ -198,10 +198,10 @@ class __TwigTemplate_f43a69a4287733da8b4baea32b1f4288 extends Template
     }
 
     .card-img-top {
-        width: 100%; /* Force la largeur à 100% */
-        height: auto; /* La hauteur s'ajuste automatiquement */
-        aspect-ratio: 1; /* Cela garantit un carré */
-        object-fit: cover; /* Assure que l'image garde un bon ratio */
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
     }
 
     .text-center {

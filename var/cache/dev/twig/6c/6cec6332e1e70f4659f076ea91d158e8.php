@@ -86,21 +86,20 @@ class __TwigTemplate_80c7f24fed768276209e10e8ddba84bf extends Template
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* Aligne le contenu vers le haut */
+        justify-content: flex-start;
         align-items: center;
-        padding: 20px; /* Ajout de padding pour espacer le contenu du bord */
+        padding: 20px;
     }
 
     .form-container {
         display: flex; 
         width: 100%;
         max-width: 1200px;
-        justify-content: center; /* Centre le formulaire */
-        margin-bottom: 20px; /* Espacement entre le formulaire et les résultats */
+        justify-content: center;
     }
 
     .form-section {
-        width: 100%; /* Utiliser toute la largeur pour un seul formulaire */
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -109,7 +108,6 @@ class __TwigTemplate_80c7f24fed768276209e10e8ddba84bf extends Template
 
     .results-container {
         width: 100%;
-        margin-top: 20px;
         padding: 0 20px;
     }
 
@@ -136,7 +134,7 @@ class __TwigTemplate_80c7f24fed768276209e10e8ddba84bf extends Template
     }
 
     .btn-red {
-        background-color: #cc0000; /* Rouge pour les boutons */
+        background-color: #cc0000;
         color: white;
         border: none;
         padding: 10px 20px;
@@ -165,7 +163,7 @@ class __TwigTemplate_80c7f24fed768276209e10e8ddba84bf extends Template
                     <label for=\"query\" class=\"sr-only\">Rechercher</label>
                     <input type=\"text\" id=\"query\" name=\"track_query\" class=\"form-control\" placeholder=\"Entrez une musique\" required>
                 </div>
-                <button type=\"submit\" class=\"btn btn-red\">Rechercher</button> <!-- Bouton rouge -->
+                <button type=\"submit\" class=\"btn btn-red\">Rechercher</button>
             </form>
         </div>
     </div>
@@ -178,23 +176,22 @@ class __TwigTemplate_80c7f24fed768276209e10e8ddba84bf extends Template
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Recherche de musique
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        document.getElementById('results').innerHTML = ''; // Effacer les résultats précédents
-        const query = document.getElementById('query').value.trim(); // Supprimer les espaces
+        document.getElementById('results').innerHTML = '';
+        const query = document.getElementById('query').value.trim();
         console.log('Recherche pour:', query);
         
         if (!query) {
             document.getElementById('results').innerHTML = '<p>Veuillez entrer une musique.</p>';
-            return; // Ne pas envoyer une requête vide
+            return;
         }
 
         document.getElementById('results').innerHTML = '<p>Chargement des résultats...</p>';
 
         fetch(`";
-        // line 124
+        // line 121
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_track_index");
         yield "?query=\${encodeURIComponent(query)}`, {
             method: 'GET',
@@ -211,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(html => {
             document.getElementById('results').innerHTML = html;
-            document.getElementById('query').value = ''; // Réinitialiser le champ de recherche
+            document.getElementById('query').value = '';
         })
         .catch(error => {
             console.error('Erreur:', error);
@@ -252,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     public function getDebugInfo(): array
     {
-        return array (  198 => 124,  76 => 4,  63 => 3,  40 => 1,);
+        return array (  195 => 121,  76 => 4,  63 => 3,  40 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -273,21 +270,20 @@ document.addEventListener('DOMContentLoaded', function() {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; /* Aligne le contenu vers le haut */
+        justify-content: flex-start;
         align-items: center;
-        padding: 20px; /* Ajout de padding pour espacer le contenu du bord */
+        padding: 20px;
     }
 
     .form-container {
         display: flex; 
         width: 100%;
         max-width: 1200px;
-        justify-content: center; /* Centre le formulaire */
-        margin-bottom: 20px; /* Espacement entre le formulaire et les résultats */
+        justify-content: center;
     }
 
     .form-section {
-        width: 100%; /* Utiliser toute la largeur pour un seul formulaire */
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -296,7 +292,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     .results-container {
         width: 100%;
-        margin-top: 20px;
         padding: 0 20px;
     }
 
@@ -323,7 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     .btn-red {
-        background-color: #cc0000; /* Rouge pour les boutons */
+        background-color: #cc0000;
         color: white;
         border: none;
         padding: 10px 20px;
@@ -352,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <label for=\"query\" class=\"sr-only\">Rechercher</label>
                     <input type=\"text\" id=\"query\" name=\"track_query\" class=\"form-control\" placeholder=\"Entrez une musique\" required>
                 </div>
-                <button type=\"submit\" class=\"btn btn-red\">Rechercher</button> <!-- Bouton rouge -->
+                <button type=\"submit\" class=\"btn btn-red\">Rechercher</button>
             </form>
         </div>
     </div>
@@ -365,17 +360,16 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Recherche de musique
     document.getElementById('searchForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        document.getElementById('results').innerHTML = ''; // Effacer les résultats précédents
-        const query = document.getElementById('query').value.trim(); // Supprimer les espaces
+        document.getElementById('results').innerHTML = '';
+        const query = document.getElementById('query').value.trim();
         console.log('Recherche pour:', query);
         
         if (!query) {
             document.getElementById('results').innerHTML = '<p>Veuillez entrer une musique.</p>';
-            return; // Ne pas envoyer une requête vide
+            return;
         }
 
         document.getElementById('results').innerHTML = '<p>Chargement des résultats...</p>';
@@ -395,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(html => {
             document.getElementById('results').innerHTML = html;
-            document.getElementById('query').value = ''; // Réinitialiser le champ de recherche
+            document.getElementById('query').value = '';
         })
         .catch(error => {
             console.error('Erreur:', error);

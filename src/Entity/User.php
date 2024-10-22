@@ -78,7 +78,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // garantir que chaque utilisateur a au moins le rôle ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -114,8 +113,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-        // Si vous stockez des données temporaires sensibles sur l'utilisateur, effacez-les ici
-        // $this->plainPassword = null;
     }
 
     /**
@@ -130,7 +127,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->favoriteTracks->contains($track)) {
             $this->favoriteTracks->add($track);
-            $track->addUser($this); // Ajouter l'utilisateur à la collection de tracks
+            $track->addUser($this);
         }
 
         return $this;
@@ -139,7 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeFavoriteTrack(Track $track): static
     {
         if ($this->favoriteTracks->removeElement($track)) {
-            $track->removeUser($this); // Retirer l'utilisateur de la collection de tracks
+            $track->removeUser($this);
         }
 
         return $this;
@@ -149,9 +146,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     foreach ($this->favoriteTracks as $track) {
         if ($track->getId() === $trackId) {
-            return true; // La piste est déjà dans les favoris
-        }
+            return true;        }
     }
-    return false; // La piste n'est pas dans les favoris
+    return false;
 }
 }

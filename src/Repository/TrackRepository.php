@@ -27,13 +27,9 @@ class TrackRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * Méthode personnalisée pour trouver une piste par son ID Spotify
-     */
     public function findOneByTrackID(string $trackId): ?Track
     {
         return $this->findOneBy(['id' => $trackId]);
     }
 
-    // Vous pouvez ajouter d'autres méthodes de requête ici
 }

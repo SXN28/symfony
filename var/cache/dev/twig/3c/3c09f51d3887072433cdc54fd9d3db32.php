@@ -59,27 +59,84 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center; 
+        align-items: center;
     }
 
-    .card {
+    .track-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         background-color: #333;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .track-row img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-right: 20px;
+        border-radius: 5px;
+    }
+
+    .track-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .track-details {
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+        flex-grow: 1;
+    }
+
+    .track-title {
+        font-size: 1.2em;
+        margin: 0 0 5px 0;
+    }
+
+    .track-title a {
         color: white;
     }
 
-    .card h5, .card p {
+    .track-artists {
+        font-size: 1em;
         color: white;
+        margin: 0;
     }
 
-    .card h5.card-title {
+    .track-artists a {
+        text-decoration: none;
         color: red;
     }
 
-    .card-img-top {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1;
-        object-fit: cover;
+    .track-artists a:hover {
+        text-decoration: underline;
+    }
+
+    .favorite-form {
+        margin-right: 20px;
+    }
+
+    .favorite-form button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .favorite-form i {
+        font-size: 1.5em;
+    }
+
+    iframe {
+        border-radius: 10px;
     }
 
     .text-center {
@@ -89,101 +146,129 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
 
 <div class=\"container\">
     ";
-        // line 44
-        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["tracks"]) || array_key_exists("tracks", $context) ? $context["tracks"] : (function () { throw new RuntimeError('Variable "tracks" does not exist.', 44, $this->source); })()))) {
-            // line 45
-            yield "        <h2 class=\"my-4 text-center\">Résultats pour \"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 45, $this->source); })()), "html", null, true);
-            yield "\"</h2>
-        <div class=\"row\">
+        // line 101
+        if ( !Twig\Extension\CoreExtension::testEmpty((isset($context["tracks"]) || array_key_exists("tracks", $context) ? $context["tracks"] : (function () { throw new RuntimeError('Variable "tracks" does not exist.', 101, $this->source); })()))) {
+            // line 102
+            yield "        <div class=\"tracks-list\">
             ";
-            // line 47
+            // line 103
             $context['_parent'] = $context;
-            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["tracks"]) || array_key_exists("tracks", $context) ? $context["tracks"] : (function () { throw new RuntimeError('Variable "tracks" does not exist.', 47, $this->source); })()));
+            $context['_seq'] = CoreExtension::ensureTraversable((isset($context["tracks"]) || array_key_exists("tracks", $context) ? $context["tracks"] : (function () { throw new RuntimeError('Variable "tracks" does not exist.', 103, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["track"]) {
-                // line 48
-                yield "                <div class=\"col-md-6 col-lg-4 mb-4\">
-                    <div class=\"card shadow-sm\">
-                        ";
-                // line 50
-                if ( !Twig\Extension\CoreExtension::testEmpty(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["track"], "album", [], "any", false, false, false, 50), "images", [], "any", false, false, false, 50))) {
-                    // line 51
-                    yield "                            <img src=\"";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["track"], "album", [], "any", false, false, false, 51), "images", [], "any", false, false, false, 51), 0, [], "array", false, false, false, 51), "url", [], "any", false, false, false, 51), "html", null, true);
-                    yield "\" class=\"card-img-top\" alt=\"Album cover\">
-                        ";
+                // line 104
+                yield "                <div class=\"track-row\">
+                    ";
+                // line 105
+                if ( !Twig\Extension\CoreExtension::testEmpty(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["track"], "album", [], "any", false, false, false, 105), "images", [], "any", false, false, false, 105))) {
+                    // line 106
+                    yield "                        <img src=\"";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, $context["track"], "album", [], "any", false, false, false, 106), "images", [], "any", false, false, false, 106), 0, [], "array", false, false, false, 106), "url", [], "any", false, false, false, 106), "html", null, true);
+                    yield "\" alt=\"Album cover\">
+                    ";
                 } else {
-                    // line 53
-                    yield "                            <img src=\"default-album-cover.jpg\" class=\"card-img-top\" alt=\"Default Album Cover\">
-                        ";
+                    // line 108
+                    yield "                        <img src=\"default-album-cover.jpg\" alt=\"Default Album Cover\">
+                    ";
                 }
-                // line 55
-                yield "                        <div class=\"card-body d-flex flex-column\">
-                            <h5 class=\"card-title track-title\">
+                // line 110
+                yield "                    <div class=\"track-info\">
+                        <div class=\"track-details\">
+                            <h5 class=\"track-title\">
                                 <a href=\"";
-                // line 57
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("track_details", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 57)]), "html", null, true);
+                // line 113
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("track_details", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 113)]), "html", null, true);
                 yield "\">";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "name", [], "any", false, false, false, 57), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "name", [], "any", false, false, false, 113), "html", null, true);
                 yield "</a>
                             </h5>
-                            <p class=\"card-text\">
-                                <strong>Artistes:</strong>
-                                <ul class=\"list-unstyled\">
-                                    ";
-                // line 62
+                            <p class=\"track-artists\">
+                                ";
+                // line 116
                 $context['_parent'] = $context;
-                $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "artists", [], "any", false, false, false, 62));
+                $context['_seq'] = CoreExtension::ensureTraversable(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "artists", [], "any", false, false, false, 116));
+                $context['loop'] = [
+                  'parent' => $context['_parent'],
+                  'index0' => 0,
+                  'index'  => 1,
+                  'first'  => true,
+                ];
+                if (is_array($context['_seq']) || (is_object($context['_seq']) && $context['_seq'] instanceof \Countable)) {
+                    $length = count($context['_seq']);
+                    $context['loop']['revindex0'] = $length - 1;
+                    $context['loop']['revindex'] = $length;
+                    $context['loop']['length'] = $length;
+                    $context['loop']['last'] = 1 === $length;
+                }
                 foreach ($context['_seq'] as $context["_key"] => $context["artist"]) {
-                    // line 63
-                    yield "                                        <li>
-                                            <a href=\"";
-                    // line 64
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("artist_details", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["artist"], "id", [], "any", false, false, false, 64)]), "html", null, true);
-                    yield "\" class=\"text-white\">";
-                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["artist"], "name", [], "any", false, false, false, 64), "html", null, true);
-                    yield "</a>
-                                        </li>
-                                    ";
+                    // line 117
+                    yield "                                    <a href=\"";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("artist_details", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["artist"], "id", [], "any", false, false, false, 117)]), "html", null, true);
+                    yield "\">";
+                    yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["artist"], "name", [], "any", false, false, false, 117), "html", null, true);
+                    yield "</a>";
+                    if ( !CoreExtension::getAttribute($this->env, $this->source, $context["loop"], "last", [], "any", false, false, false, 117)) {
+                        yield ", ";
+                    }
+                    // line 118
+                    yield "                                ";
+                    ++$context['loop']['index0'];
+                    ++$context['loop']['index'];
+                    $context['loop']['first'] = false;
+                    if (isset($context['loop']['revindex0'], $context['loop']['revindex'])) {
+                        --$context['loop']['revindex0'];
+                        --$context['loop']['revindex'];
+                        $context['loop']['last'] = 0 === $context['loop']['revindex0'];
+                    }
                 }
                 $_parent = $context['_parent'];
-                unset($context['_seq'], $context['_key'], $context['artist'], $context['_parent']);
+                unset($context['_seq'], $context['_key'], $context['artist'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 67
-                yield "                                </ul>
-                            </p>
-                            <!-- Spotify Player -->
-                            <iframe src=\"https://open.spotify.com/embed/track/";
-                // line 70
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 70), "html", null, true);
-                yield "\" width=\"100%\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>
-                            
-                            <div>
-                                <form action=\"";
-                // line 73
-                yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_add_favorites");
-                yield "\" method=\"post\">
-                                    <input type=\"hidden\" name=\"id\" value=\"";
-                // line 74
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 74), "html", null, true);
-                yield "\">
-                                    <button type=\"submit\">
-                                        ";
-                // line 76
-                if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 76, $this->source); })()), "user", [], "any", false, false, false, 76), "hasTrack", [CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 76)], "method", false, false, false, 76)) {
-                    // line 77
-                    yield "                                            <i class=\"fas fa-heart\" style=\"color: #ff69b4;\"></i>
-                                        ";
-                } else {
-                    // line 79
-                    yield "                                            <i class=\"far fa-heart\" style=\"color: black;\"></i>
-                                        ";
-                }
-                // line 81
-                yield "                                    </button>
-                                </form>
-                            </div>
+                // line 119
+                yield "                            </p>
                         </div>
+
+                        ";
+                // line 122
+                if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 122, $this->source); })()), "user", [], "any", false, false, false, 122)) {
+                    // line 123
+                    yield "                            <div class=\"favorite-form\">
+                                ";
+                    // line 124
+                    if (CoreExtension::getAttribute($this->env, $this->source, CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 124, $this->source); })()), "user", [], "any", false, false, false, 124), "hasTrack", [CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 124)], "method", false, false, false, 124)) {
+                        // line 125
+                        yield "                                    <form action=\"";
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_remove_favorites", ["trackId" => CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 125)]), "html", null, true);
+                        yield "\" method=\"post\">
+                                        <button type=\"submit\">
+                                            <i class=\"fas fa-heart\" style=\"color: red;\"></i>
+                                        </button>
+                                    </form>
+                                ";
+                    } else {
+                        // line 131
+                        yield "                                    <form action=\"";
+                        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_add_favorites");
+                        yield "\" method=\"post\">
+                                        <input type=\"hidden\" name=\"id\" value=\"";
+                        // line 132
+                        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 132), "html", null, true);
+                        yield "\">
+                                        <button type=\"submit\">
+                                            <i class=\"far fa-heart\" style=\"color: red;\"></i>
+                                        </button>
+                                    </form>
+                                ";
+                    }
+                    // line 138
+                    yield "                            </div>
+                        ";
+                }
+                // line 140
+                yield "
+                        <iframe src=\"https://open.spotify.com/embed/track/";
+                // line 141
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 141), "html", null, true);
+                yield "\" width=\"300\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>
                     </div>
                 </div>
             ";
@@ -191,17 +276,17 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_key'], $context['track'], $context['_parent']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 88
+            // line 145
             yield "        </div>
     ";
         } else {
-            // line 90
+            // line 147
             yield "        <h2 class=\"my-4 text-center\">Aucune piste trouvée pour \"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 90, $this->source); })()), "html", null, true);
-            yield "\"</h2> <!-- Message if no tracks are found -->
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["query"]) || array_key_exists("query", $context) ? $context["query"] : (function () { throw new RuntimeError('Variable "query" does not exist.', 147, $this->source); })()), "html", null, true);
+            yield "\"</h2>
     ";
         }
-        // line 92
+        // line 149
         yield "</div>
 ";
         
@@ -234,7 +319,7 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  205 => 92,  199 => 90,  195 => 88,  183 => 81,  179 => 79,  175 => 77,  173 => 76,  168 => 74,  164 => 73,  158 => 70,  153 => 67,  142 => 64,  139 => 63,  135 => 62,  125 => 57,  121 => 55,  117 => 53,  111 => 51,  109 => 50,  105 => 48,  101 => 47,  95 => 45,  93 => 44,  48 => 1,);
+        return array (  290 => 149,  284 => 147,  280 => 145,  270 => 141,  267 => 140,  263 => 138,  254 => 132,  249 => 131,  239 => 125,  237 => 124,  234 => 123,  232 => 122,  227 => 119,  213 => 118,  204 => 117,  187 => 116,  179 => 113,  174 => 110,  170 => 108,  164 => 106,  162 => 105,  159 => 104,  155 => 103,  152 => 102,  150 => 101,  48 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -253,27 +338,84 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center; 
+        align-items: center;
     }
 
-    .card {
+    .track-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         background-color: #333;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .track-row img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-right: 20px;
+        border-radius: 5px;
+    }
+
+    .track-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .track-details {
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+        flex-grow: 1;
+    }
+
+    .track-title {
+        font-size: 1.2em;
+        margin: 0 0 5px 0;
+    }
+
+    .track-title a {
         color: white;
     }
 
-    .card h5, .card p {
+    .track-artists {
+        font-size: 1em;
         color: white;
+        margin: 0;
     }
 
-    .card h5.card-title {
+    .track-artists a {
+        text-decoration: none;
         color: red;
     }
 
-    .card-img-top {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1;
-        object-fit: cover;
+    .track-artists a:hover {
+        text-decoration: underline;
+    }
+
+    .favorite-form {
+        margin-right: 20px;
+    }
+
+    .favorite-form button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .favorite-form i {
+        font-size: 1.5em;
+    }
+
+    iframe {
+        border-radius: 10px;
     }
 
     .text-center {
@@ -283,52 +425,52 @@ class __TwigTemplate_c2b0ac32954629dbea108c729136435f extends Template
 
 <div class=\"container\">
     {% if tracks is not empty %}
-        <h2 class=\"my-4 text-center\">Résultats pour \"{{ query }}\"</h2>
-        <div class=\"row\">
+        <div class=\"tracks-list\">
             {% for track in tracks %}
-                <div class=\"col-md-6 col-lg-4 mb-4\">
-                    <div class=\"card shadow-sm\">
-                        {% if track.album.images is not empty %}
-                            <img src=\"{{ track.album.images[0].url }}\" class=\"card-img-top\" alt=\"Album cover\">
-                        {% else %}
-                            <img src=\"default-album-cover.jpg\" class=\"card-img-top\" alt=\"Default Album Cover\">
-                        {% endif %}
-                        <div class=\"card-body d-flex flex-column\">
-                            <h5 class=\"card-title track-title\">
+                <div class=\"track-row\">
+                    {% if track.album.images is not empty %}
+                        <img src=\"{{ track.album.images[0].url }}\" alt=\"Album cover\">
+                    {% else %}
+                        <img src=\"default-album-cover.jpg\" alt=\"Default Album Cover\">
+                    {% endif %}
+                    <div class=\"track-info\">
+                        <div class=\"track-details\">
+                            <h5 class=\"track-title\">
                                 <a href=\"{{ path('track_details', {'id': track.id}) }}\">{{ track.name }}</a>
                             </h5>
-                            <p class=\"card-text\">
-                                <strong>Artistes:</strong>
-                                <ul class=\"list-unstyled\">
-                                    {% for artist in track.artists %}
-                                        <li>
-                                            <a href=\"{{ path('artist_details', { 'id': artist.id }) }}\" class=\"text-white\">{{ artist.name }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                            <p class=\"track-artists\">
+                                {% for artist in track.artists %}
+                                    <a href=\"{{ path('artist_details', { 'id': artist.id }) }}\">{{ artist.name }}</a>{% if not loop.last %}, {% endif %}
+                                {% endfor %}
                             </p>
-                            <!-- Spotify Player -->
-                            <iframe src=\"https://open.spotify.com/embed/track/{{ track.id }}\" width=\"100%\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>
-                            
-                            <div>
-                                <form action=\"{{ path('app_add_favorites') }}\" method=\"post\">
-                                    <input type=\"hidden\" name=\"id\" value=\"{{ track.id }}\">
-                                    <button type=\"submit\">
-                                        {% if app.user.hasTrack(track.id) %}
-                                            <i class=\"fas fa-heart\" style=\"color: #ff69b4;\"></i>
-                                        {% else %}
-                                            <i class=\"far fa-heart\" style=\"color: black;\"></i>
-                                        {% endif %}
-                                    </button>
-                                </form>
-                            </div>
                         </div>
+
+                        {% if app.user %}
+                            <div class=\"favorite-form\">
+                                {% if app.user.hasTrack(track.id) %}
+                                    <form action=\"{{ path('app_remove_favorites', { 'trackId': track.id }) }}\" method=\"post\">
+                                        <button type=\"submit\">
+                                            <i class=\"fas fa-heart\" style=\"color: red;\"></i>
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <form action=\"{{ path('app_add_favorites') }}\" method=\"post\">
+                                        <input type=\"hidden\" name=\"id\" value=\"{{ track.id }}\">
+                                        <button type=\"submit\">
+                                            <i class=\"far fa-heart\" style=\"color: red;\"></i>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+                        <iframe src=\"https://open.spotify.com/embed/track/{{ track.id }}\" width=\"300\" height=\"80\" frameborder=\"0\" allowtransparency=\"true\" allow=\"encrypted-media\"></iframe>
                     </div>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <h2 class=\"my-4 text-center\">Aucune piste trouvée pour \"{{ query }}\"</h2> <!-- Message if no tracks are found -->
+        <h2 class=\"my-4 text-center\">Aucune piste trouvée pour \"{{ query }}\"</h2>
     {% endif %}
 </div>
 ", "track/results.html.twig", "C:\\Users\\Clément\\symfony\\templates\\track\\results.html.twig");

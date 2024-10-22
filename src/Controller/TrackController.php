@@ -75,22 +75,22 @@ class TrackController extends AbstractController
         
         $track = $response->toArray();
 
-        return $this->render('track/details.html.twig', [
-            'track' => $track,
-        ]);
-    }
-
-    public function getTrack(string $id): Track
-    {
-        $token = $this->authSpotifyService->auth();
-        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $id, [
+        $recommendationsResponse = $this->httpClient->request('GET', 'https://api.spotify.com/v1/recommendations', [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
-            ]
+            ],
+            'query' => [
+                'seed_tracks' => $id,
+                'limit' => 12,
+            ],
         ]);
 
-        $track = $this->trackFactory->createFromSpotifyData($response->toArray());
-        return $track;
+        $recommendations = $recommendationsResponse->toArray()['tracks'];
+
+        return $this->render('track/details.html.twig', [
+            'track' => $track,
+            'recommendations' => $recommendations,
+        ]);
     }
 
     #[Route('/addfavorites', name: 'app_add_favorites', methods: ['POST'])]
@@ -106,7 +106,7 @@ class TrackController extends AbstractController
         $track = $trackRepository->findOneBy(['id' => $trackId]);
 
         if (!$track) {
-            $track = $this->getTrack($trackId); // Récupérer la piste depuis Spotify
+            $track = $this->getTrack($trackId);
             $em->persist($track);
             $em->flush();
             $this->addFlash('success', 'Le morceau a été ajouté avec succès.');
