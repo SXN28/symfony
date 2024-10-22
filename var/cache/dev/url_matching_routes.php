@@ -15,6 +15,8 @@ return [
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/artist' => [[['_route' => 'app_artist_index', '_controller' => 'App\\Controller\\ArtistController::index'], null, null, null, false, false, null]],
+        '/addfavorites/artist' => [[['_route' => 'app_add_favorites_artist', '_controller' => 'App\\Controller\\ArtistController::addFavoriteArtist'], null, ['POST' => 0], null, false, false, null]],
+        '/favorites/artists' => [[['_route' => 'app_favorites_artists', '_controller' => 'App\\Controller\\ArtistController::showFavoriteArtists'], null, ['GET' => 0], null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\LoginController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\LoginController::logout'], null, null, null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
@@ -43,8 +45,11 @@ return [
                     .')'
                 .')'
                 .'|/artist/([^/]++)(*:218)'
-                .'|/track/([^/]++)(*:241)'
-                .'|/removefavorites/([^/]++)(*:274)'
+                .'|/removefavorites/(?'
+                    .'|artists/([^/]++)(*:262)'
+                    .'|([^/]++)(*:278)'
+                .')'
+                .'|/track/([^/]++)(*:302)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -57,9 +62,10 @@ return [
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         218 => [[['_route' => 'artist_details', '_controller' => 'App\\Controller\\ArtistController::details'], ['id'], null, null, false, true, null]],
-        241 => [[['_route' => 'track_details', '_controller' => 'App\\Controller\\TrackController::details'], ['id'], null, null, false, true, null]],
-        274 => [
-            [['_route' => 'app_remove_favorites', '_controller' => 'App\\Controller\\TrackController::removeFavorite'], ['trackId'], ['POST' => 0], null, false, true, null],
+        262 => [[['_route' => 'app_remove_favorites_artist', '_controller' => 'App\\Controller\\ArtistController::removeFavoriteArtist'], ['artistId'], ['POST' => 0], null, false, true, null]],
+        278 => [[['_route' => 'app_remove_favorites', '_controller' => 'App\\Controller\\TrackController::removeFavorite'], ['trackId'], ['POST' => 0], null, false, true, null]],
+        302 => [
+            [['_route' => 'track_details', '_controller' => 'App\\Controller\\TrackController::details'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

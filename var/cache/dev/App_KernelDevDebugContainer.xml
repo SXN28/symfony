@@ -356,6 +356,9 @@
       <tag name="container.service_subscriber"/>
       <argument type="service" id="App\Service\AuthSpotifyService"/>
       <argument type="service" id=".debug.http_client"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+      <argument type="service" id="App\Repository\UserRepository"/>
+      <argument type="service" id="App\Repository\ArtistRepository"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.QaaoWjx.App\Controller\ArtistController"/>
       </call>
@@ -393,6 +396,10 @@
     </service>
     <service id="App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+    </service>
+    <service id="App\Repository\ArtistRepository" class="App\Repository\ArtistRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\TrackRepository" class="App\Repository\TrackRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -443,7 +450,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.rDi3uOY"/>
+      <argument type="service" id=".service_locator.hlt0EDH"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3343,7 +3350,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.rDi3uOY"/>
+      <argument type="service" id=".service_locator.hlt0EDH"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -5120,7 +5127,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.Yf5GVXO"/>
+      <argument type="service" id=".service_locator..i.h1Hk"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -7187,6 +7194,8 @@
     <service id=".abstract.instanceof.App\Form\LoginType" class="App\Form\LoginType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ArtistRepository" class="App\Repository\ArtistRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ArtistRepository" class="App\Repository\ArtistRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\TrackRepository" class="App\Repository\TrackRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\TrackRepository" class="App\Repository\TrackRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
@@ -7725,6 +7734,24 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.4wc4Ag1" method="withContext"/>
     </service>
+    <service id=".service_locator.TWxDQA4" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.TWxDQA4.App\Controller\ArtistController::addFavoriteArtist()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ArtistController::addFavoriteArtist()"/>
+      <argument>App\Controller\ArtistController::addFavoriteArtist()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TWxDQA4" method="withContext"/>
+    </service>
+    <service id=".service_locator.TWxDQA4.App\Controller\ArtistController::removeFavoriteArtist()" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ArtistController::removeFavoriteArtist()"/>
+      <argument>App\Controller\ArtistController::removeFavoriteArtist()</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.TWxDQA4" method="withContext"/>
+    </service>
     <service id=".service_locator.mXDaS5b" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7764,31 +7791,29 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.B373W1m" method="withContext"/>
     </service>
-    <service id=".service_locator.TWxDQA4" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-      </argument>
-    </service>
     <service id=".service_locator.TWxDQA4.App\Controller\TrackController::removeFavorite()" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\TrackController::removeFavorite()"/>
       <argument>App\Controller\TrackController::removeFavorite()</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.TWxDQA4" method="withContext"/>
     </service>
-    <service id=".service_locator.rDi3uOY" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.hlt0EDH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
+        <argument key="App\Controller\ArtistController::addFavoriteArtist" type="service_closure" id=".service_locator.TWxDQA4.App\Controller\ArtistController::addFavoriteArtist()"/>
+        <argument key="App\Controller\ArtistController::removeFavoriteArtist" type="service_closure" id=".service_locator.TWxDQA4.App\Controller\ArtistController::removeFavoriteArtist()"/>
         <argument key="App\Controller\LoginController::login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\LoginController::login()"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.g9BceMG.App\Controller\RegistrationController::register()"/>
         <argument key="App\Controller\TrackController::addFavorite" type="service_closure" id=".service_locator.B373W1m.App\Controller\TrackController::addFavorite()"/>
         <argument key="App\Controller\TrackController::removeFavorite" type="service_closure" id=".service_locator.TWxDQA4.App\Controller\TrackController::removeFavorite()"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.4wc4Ag1.kernel::registerContainerConfiguration()"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.4wc4Ag1.kernel::loadRoutes()"/>
+        <argument key="App\Controller\ArtistController:addFavoriteArtist" type="service_closure" id=".service_locator.TWxDQA4.App\Controller\ArtistController::addFavoriteArtist()"/>
+        <argument key="App\Controller\ArtistController:removeFavoriteArtist" type="service_closure" id=".service_locator.TWxDQA4.App\Controller\ArtistController::removeFavoriteArtist()"/>
         <argument key="App\Controller\LoginController:login" type="service_closure" id=".service_locator.mXDaS5b.App\Controller\LoginController::login()"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.g9BceMG.App\Controller\RegistrationController::register()"/>
         <argument key="App\Controller\TrackController:addFavorite" type="service_closure" id=".service_locator.B373W1m.App\Controller\TrackController::addFavorite()"/>
@@ -8082,9 +8107,10 @@
         <argument key="turbo.doctrine.event_listener" type="service_closure" id="turbo.doctrine.event_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.Yf5GVXO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator..i.h1Hk" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\ArtistRepository" type="service_closure" id="App\Repository\ArtistRepository"/>
         <argument key="App\Repository\TrackRepository" type="service_closure" id="App\Repository\TrackRepository"/>
         <argument key="App\Repository\UserRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
@@ -9906,7 +9932,7 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.pRu6x_4" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.rDi3uOY"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.hlt0EDH"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.BxSdgVt"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9949,10 +9975,10 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.diNoEIK" alias=".service_locator.4wc4Ag1"/>
+    <service id=".service_locator.CK66ULR" alias=".service_locator.TWxDQA4"/>
     <service id=".service_locator...2Ndi3" alias=".service_locator.mXDaS5b"/>
     <service id=".service_locator.po3y92J" alias=".service_locator.g9BceMG"/>
     <service id=".service_locator.8AMsGgt" alias=".service_locator.B373W1m"/>
-    <service id=".service_locator.CK66ULR" alias=".service_locator.TWxDQA4"/>
     <service id=".service_locator.b491maD" alias=".service_locator.QaaoWjx"/>
   </services>
 </container>

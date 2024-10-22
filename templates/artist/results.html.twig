@@ -19,9 +19,11 @@
         background-color: #333;
         color: white;
         height: 100%;
+        border-radius: 10px;
     }
 
     .card h5, .card p {
+        text-align: center;
         color: white;
     }
 
@@ -30,10 +32,40 @@
         height: auto;
         aspect-ratio: 1;
         object-fit: cover;
+        border-radius: 10px 10px 0 0;
     }
 
     .text-center {
         color: white;
+    }
+
+    .favorite-form {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .favorite-form button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .favorite-form i {
+        font-size: 1.5em;
+        transition: color 0.3s;
+    }
+
+    .favorite-form button:hover i {
+        color: red;
+    }
+
+    .favorite-form i.fa-heart {
+        color: red;
+    }
+
+    .favorite-form i.far.fa-heart {
+        color: red;
     }
 </style>
 
@@ -48,13 +80,35 @@
                             <h5 class="card-title">
                                 <a href="{{ path('artist_details', { 'id': artist.id }) }}" class="text-white">{{ artist.name }}</a>
                             </h5>
+
+                            {% if app.user %}
+                                <div class="favorite-form">
+                                    {% if app.user.hasArtist(artist.id) %}
+                                        <form action="{{ path('app_remove_favorites_artist', { 'artistId': artist.id }) }}" method="post">
+                                            <button type="submit" title="Retirer des favoris">
+                                                <i class="fas fa-heart"></i> <!-- Cœur rempli -->
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form action="{{ path('app_add_favorites_artist') }}" method="post">
+                                            <input type="hidden" name="id" value="{{ artist.id }}">
+                                            <button type="submit" title="Ajouter aux favoris">
+                                                <i class="far fa-heart"></i> <!-- Cœur vide -->
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
                             {% if artist.images is not empty %}
-                                <img src="{{ artist.images[0].url }}" class="card-img-top" alt="Artist image">
+                                <img src="{{ artist.images[0].url }}" class="card-img-top" alt="Image de l'artiste">
                             {% endif %}
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
+    {% else %}
+        <h2 class="my-4 text-center">Aucun artiste trouvé pour "{{ artist_query }}"</h2>
     {% endif %}
 </div>

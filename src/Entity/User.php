@@ -38,6 +38,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Track::class, inversedBy: 'users')]
     private Collection $favoriteTracks;
 
+    #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'users')]
+    private Collection $favoriteArtists;
+
     public function __construct()
     {
         $this->favoriteTracks = new ArrayCollection();
@@ -143,11 +146,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function hasTrack(string $trackId): bool
-{
-    foreach ($this->favoriteTracks as $track) {
-        if ($track->getId() === $trackId) {
-            return true;        }
+    {
+        foreach ($this->favoriteTracks as $track) {
+            if ($track->getId() === $trackId) {
+                return true;        }
+        }
+        return false;
     }
-    return false;
-}
+
+    public function addArtist(Artist $artist): static
+    {
+        if (!$this->favoriteArtists->contains($artist)) {
+            $this->favoriteArtists->add($artist);
+        }
+        return $this;
+    }
+
+    public function removeFavoriteArtist(Artist $artist): static
+    {
+        $this->favoriteArtists->removeElement($artist);
+        return $this;
+    }
+
+    public function getFavoriteArtists(): Collection
+    {
+        return $this->favoriteArtists;
+    }
+
+    public function hasArtist(string $artistId): bool
+    {
+        foreach ($this->favoriteArtists as $artist) {
+            if ($artist->getId() === $artistId) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

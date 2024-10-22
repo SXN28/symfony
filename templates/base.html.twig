@@ -127,7 +127,11 @@
             <a href="{{ path('app_track_index') }}">Recherche de Musique</a>
             <a href="{{ path('app_artist_index') }}">Recherche d'Artiste</a>
             {% if app.user %}
-                <a href="{{path('app_favorites')}}">Favoris</a>
+                <a href="{{path('app_favorites')}}">Musiques Favories</a>
+            {% endif %}
+
+            {% if app.user %}
+                <a href="{{path('app_favorites_artists')}}">Artistes Favoris</a>
             {% endif %}
         </div>
 

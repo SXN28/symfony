@@ -141,6 +141,10 @@ class __TwigTemplate_d2b362a0720729afd0ca6fbf7da79b94 extends Template
         margin: 10px 0;
     }
 
+    .card h2 a {
+        color: white;
+    }
+
     .btn {
         background-color: #cc0000;
         color: white;
@@ -167,36 +171,40 @@ class __TwigTemplate_d2b362a0720729afd0ca6fbf7da79b94 extends Template
 
 <div class=\"favorites-container\">
     ";
-        // line 75
+        // line 79
         $context['_parent'] = $context;
-        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["favoriteTracks"]) || array_key_exists("favoriteTracks", $context) ? $context["favoriteTracks"] : (function () { throw new RuntimeError('Variable "favoriteTracks" does not exist.', 75, $this->source); })()));
+        $context['_seq'] = CoreExtension::ensureTraversable((isset($context["favoriteTracks"]) || array_key_exists("favoriteTracks", $context) ? $context["favoriteTracks"] : (function () { throw new RuntimeError('Variable "favoriteTracks" does not exist.', 79, $this->source); })()));
         $context['_iterated'] = false;
         foreach ($context['_seq'] as $context["_key"] => $context["track"]) {
-            // line 76
+            // line 80
             yield "        <div class=\"card\">
             ";
-            // line 77
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["track"], "pictureLink", [], "any", false, false, false, 77)) {
-                // line 78
+            // line 81
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["track"], "pictureLink", [], "any", false, false, false, 81)) {
+                // line 82
                 yield "                <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "pictureLink", [], "any", false, false, false, 78), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "pictureLink", [], "any", false, false, false, 82), "html", null, true);
                 yield "\" alt=\"Image de la musique\">
             ";
             } else {
-                // line 80
+                // line 84
                 yield "                <img src=\"/path/to/default-image.jpg\" alt=\"Image par défaut\">
             ";
             }
-            // line 82
+            // line 86
             yield "
             <div class=\"card-body\">
-                <h2>";
-            // line 84
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "name", [], "any", false, false, false, 84), "html", null, true);
-            yield "</h2>
+                <h2>
+                    <a href=\"";
+            // line 89
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("track_details", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 89)]), "html", null, true);
+            yield "\">";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["track"], "name", [], "any", false, false, false, 89), "html", null, true);
+            yield "</a>
+                </h2>
                 <form action=\"";
-            // line 85
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_remove_favorites", ["trackId" => CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 85)]), "html", null, true);
+            // line 91
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_remove_favorites", ["trackId" => CoreExtension::getAttribute($this->env, $this->source, $context["track"], "id", [], "any", false, false, false, 91)]), "html", null, true);
             yield "\" method=\"post\">
                     <button type=\"submit\" class=\"btn\">Supprimer des favoris</button>
                 </form>
@@ -206,14 +214,14 @@ class __TwigTemplate_d2b362a0720729afd0ca6fbf7da79b94 extends Template
             $context['_iterated'] = true;
         }
         if (!$context['_iterated']) {
-            // line 91
+            // line 97
             yield "        <p>Aucun morceau dans vos favoris.</p>
     ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['track'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 93
+        // line 99
         yield "</div>
 
 ";
@@ -247,7 +255,7 @@ class __TwigTemplate_d2b362a0720729afd0ca6fbf7da79b94 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  217 => 93,  210 => 91,  199 => 85,  195 => 84,  191 => 82,  187 => 80,  181 => 78,  179 => 77,  176 => 76,  171 => 75,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  225 => 99,  218 => 97,  207 => 91,  200 => 89,  195 => 86,  191 => 84,  185 => 82,  183 => 81,  180 => 80,  175 => 79,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -301,6 +309,10 @@ class __TwigTemplate_d2b362a0720729afd0ca6fbf7da79b94 extends Template
         margin: 10px 0;
     }
 
+    .card h2 a {
+        color: white;
+    }
+
     .btn {
         background-color: #cc0000;
         color: white;
@@ -335,7 +347,9 @@ class __TwigTemplate_d2b362a0720729afd0ca6fbf7da79b94 extends Template
             {% endif %}
 
             <div class=\"card-body\">
-                <h2>{{ track.name }}</h2>
+                <h2>
+                    <a href=\"{{ path('track_details', {'id': track.id}) }}\">{{ track.name }}</a>
+                </h2>
                 <form action=\"{{ path('app_remove_favorites', {'trackId': track.id}) }}\" method=\"post\">
                     <button type=\"submit\" class=\"btn\">Supprimer des favoris</button>
                 </form>

@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artistes Favoris{% endblock %}
+
+{% block body %}
+<style>
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: white;
+        font-size: 2em;
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .card {
+        background-color: #444;
+        color: white;
+        width: 250px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow: hidden;
+    }
+
+
+    .card h3 {
+        font-size: 1.5em;
+        margin: 15px 0;
+        text-align: center;
+    }
+
+    .card h3 a {
+        color: white;
+    }
+
+    .btn-fav {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        transition: transform 0.2s;
+    }
+
+
+    .btn-fav i {
+        font-size: 1.5em;
+    }
+
+    p {
+        text-align: center;
+        font-size: 1.1em;
+        color: #666;
+    }
+</style>
+
+<h1>Mes Artistes Favoris</h1>
+
+{% if favoriteArtists is empty %}
+    <p>Aucun artiste favori trouvé.</p>
+{% else %}
+    <div class="card-container">
+        {% for artist in favoriteArtists %}
+            <div class="card">
+                <h3>
+                    <a href="{{ path('artist_details', { 'id': artist.id }) }}">{{ artist.name }}</a>
+                </h3>
+                <div class="favorite-form">
+                    <form action="{{ path('app_remove_favorites_artist', { 'artistId': artist.id }) }}" method="post">
+                        <button type="submit" title="Retirer des favoris" class="btn-fav">
+                            <i class="fas fa-heart" style="color: red;"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock %}

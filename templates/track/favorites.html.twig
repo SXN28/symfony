@@ -47,6 +47,10 @@
         margin: 10px 0;
     }
 
+    .card h2 a {
+        color: white;
+    }
+
     .btn {
         background-color: #cc0000;
         color: white;
@@ -81,7 +85,9 @@
             {% endif %}
 
             <div class="card-body">
-                <h2>{{ track.name }}</h2>
+                <h2>
+                    <a href="{{ path('track_details', {'id': track.id}) }}">{{ track.name }}</a>
+                </h2>
                 <form action="{{ path('app_remove_favorites', {'trackId': track.id}) }}" method="post">
                     <button type="submit" class="btn">Supprimer des favoris</button>
                 </form>

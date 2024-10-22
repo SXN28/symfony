@@ -208,23 +208,34 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
             // line 130
             yield "                <a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_favorites");
-            yield "\">Favoris</a>
+            yield "\">Musiques Favories</a>
             ";
         }
         // line 132
+        yield "
+            ";
+        // line 133
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 133, $this->source); })()), "user", [], "any", false, false, false, 133)) {
+            // line 134
+            yield "                <a href=\"";
+            yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_favorites_artists");
+            yield "\">Artistes Favoris</a>
+            ";
+        }
+        // line 136
         yield "        </div>
 
         <div class=\"main-wrapper\">
             <div class=\"navbar\">
                 <h1>";
-        // line 136
+        // line 140
         yield from $this->unwrap()->yieldBlock('title', $context, $blocks);
         yield "</h1>
                 <div class=\"right\">
                     ";
-        // line 138
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 138, $this->source); })()), "user", [], "any", false, false, false, 138)) {
-            // line 139
+        // line 142
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 142, $this->source); })()), "user", [], "any", false, false, false, 142)) {
+            // line 143
             yield "                        <a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
             yield "\">
@@ -232,7 +243,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                         </a>
                     ";
         } else {
-            // line 143
+            // line 147
             yield "                        <a href=\"";
             yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
             yield "\">
@@ -240,7 +251,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
                         </a>
                     ";
         }
-        // line 147
+        // line 151
         yield "                    <a href=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
         yield "\">
@@ -251,9 +262,9 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
 
             <div class=\"main-content\">
                 ";
-        // line 154
+        // line 158
         yield from $this->unwrap()->yieldBlock('body', $context, $blocks);
-        // line 155
+        // line 159
         yield "            </div>
         </div>
     </body>
@@ -313,7 +324,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         yield from [];
     }
 
-    // line 136
+    // line 140
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -336,7 +347,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
         yield from [];
     }
 
-    // line 154
+    // line 158
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -379,7 +390,7 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  340 => 154,  317 => 136,  295 => 117,  272 => 6,  257 => 155,  255 => 154,  244 => 147,  236 => 143,  228 => 139,  226 => 138,  221 => 136,  215 => 132,  209 => 130,  207 => 129,  203 => 128,  199 => 127,  196 => 126,  190 => 124,  188 => 123,  184 => 122,  178 => 118,  176 => 117,  64 => 8,  59 => 6,  52 => 1,);
+        return array (  351 => 158,  328 => 140,  306 => 117,  283 => 6,  268 => 159,  266 => 158,  255 => 151,  247 => 147,  239 => 143,  237 => 142,  232 => 140,  226 => 136,  220 => 134,  218 => 133,  215 => 132,  209 => 130,  207 => 129,  203 => 128,  199 => 127,  196 => 126,  190 => 124,  188 => 123,  184 => 122,  178 => 118,  176 => 117,  64 => 8,  59 => 6,  52 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -513,7 +524,11 @@ class __TwigTemplate_95770bccb00a474daf73fa737f0e0bb0 extends Template
             <a href=\"{{ path('app_track_index') }}\">Recherche de Musique</a>
             <a href=\"{{ path('app_artist_index') }}\">Recherche d'Artiste</a>
             {% if app.user %}
-                <a href=\"{{path('app_favorites')}}\">Favoris</a>
+                <a href=\"{{path('app_favorites')}}\">Musiques Favories</a>
+            {% endif %}
+
+            {% if app.user %}
+                <a href=\"{{path('app_favorites_artists')}}\">Artistes Favoris</a>
             {% endif %}
         </div>
 
